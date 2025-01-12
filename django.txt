@@ -1,0 +1,9 @@
+1）django-admin startproject H5game
+2）cd H5game
+	python manage.py startapp game
+3）将应用添加到 settings.py 文件的 INSTALLED_APPS 列表中：
+
+INSTALLED_APPS = [
+    ...
+    'game',
+]
