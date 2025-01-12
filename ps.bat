@@ -5,6 +5,6 @@ rem 当前日期时间是：%CurrentDateTime%
 
 git add *
 git commit -m "%CurrentDateTime%
-git push origin master
+git push origin main
 
 timeout /t 5
