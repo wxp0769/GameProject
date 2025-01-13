@@ -1,12 +1,19 @@
 from django.db import models
-
+import os
+from uuid import uuid4
 # Create your models here.
-
+def get_file_path(instance, filename):
+    # 将原始文件名分割为文件名和扩展名
+    ext = filename.split('.')[-1]
+    # 生成新的文件名，这里使用UUID确保唯一性
+    filename = f"{uuid4()}.{ext}"
+    # 返回文件的保存路径，这里假设我们将文件保存在'uploads/'目录下
+    return os.path.join('avatars/', filename)
 class Site(models.Model):
     nid = models.AutoField(primary_key=True)
     site_url = models.CharField(verbose_name='站点域名', max_length=32)
     site_name = models.CharField(verbose_name='站点名称', max_length=64)
-    logo = models.CharField(verbose_name='站点域名', max_length=32)
+    logo = models.FileField(upload_to=get_file_path, default="/avatars/default.png")
     title = models.CharField(verbose_name='SEO标题', max_length=64)
     description = models.CharField(verbose_name='Game Description', max_length=255)
 
