@@ -1,1 +1,1 @@
-Python项目练习
+Django练习项目
