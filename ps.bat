@@ -7,4 +7,4 @@ git add *
 git commit -m "%CurrentDateTime%
 git push origin main
 
-timeout /t 5
+timeout /t 50
