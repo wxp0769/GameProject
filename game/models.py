@@ -1,6 +1,7 @@
-from django.db import models
 import os
 from uuid import uuid4
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.db import models
 
 
 # Create your models here.
@@ -17,7 +18,7 @@ class Site(models.Model):
     nid = models.AutoField(primary_key=True)
     site_url = models.CharField(verbose_name='站点域名', max_length=32)
     site_name = models.CharField(verbose_name='站点名称', max_length=64)
-    logo = models.FileField(upload_to=get_file_path, default="/avatars/default.png")
+    logo = RichTextUploadingField()
     title = models.CharField(verbose_name='SEO标题', max_length=64)
     description = models.CharField(verbose_name='Game Description', max_length=255)
 
@@ -31,13 +32,13 @@ class Game(models.Model):
     iframeTitle = models.CharField(verbose_name='Game Name', max_length=50)
     iframeDescription = models.CharField(verbose_name='Game Description', max_length=255)
     thumbnail = models.FileField(upload_to=get_file_path, default="/avatars/default.png")
-    iframePageUrl = models.CharField(verbose_name='Play_', max_length=50)
+    iframePageUrl = models.CharField(verbose_name='Play_Html', max_length=50)
     GamePageUrl = models.CharField(verbose_name='Game Name', max_length=50)
     recommend = models.IntegerField(default=0)
     create_time = models.DateTimeField(verbose_name='create_time', auto_now_add=True)
     update_time = models.DateTimeField(verbose_name='update_time', auto_now_add=True)
-    content = models.TextField()
-    whatis = models.TextField()
-    HowtoPlay = models.TextField()
+    content = RichTextUploadingField()
+    whatis = RichTextUploadingField()
+    HowtoPlay = RichTextUploadingField()
     def __str__(self):
         return self.title
