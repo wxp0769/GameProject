@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑游戏</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">编辑游戏</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- 游戏表单字段 -->
+        <div class="form-group" style="display: flex; align-items: center;">
+            <div style="flex: 1;">
+                <div class="form-group d-flex align-items-center">
+                    {{ game_form.is_checked.label_tag }}
+                    {{ game_form.is_checked }}  <!-- 直接渲染字段 -->
+                </div>
+                <div style="display: flex; align-items: center;">
+                    {{ game_form.title.label_tag }}
+                    {{ game_form.title }}  <!-- 直接渲染字段 -->
+                    <button id="gamename">G</button>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    {{ game_form.slug.label_tag }}
+                    {{ game_form.slug }}  <!-- 直接渲染字段 -->
+                </div>
+                <div style="display: flex; align-items: center;">
+                    {{ game_form.description.label_tag }}
+                    {{ game_form.description }}  <!-- 直接渲染字段 -->
+                    <button id="description">Ai</button>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    {{ game_form.iframeUrl.label_tag }}
+                    {{ game_form.iframeUrl }}  <!-- 直接渲染字段 -->
+                </div>
+                <div style="display: flex; align-items: center;">
+                    {{ game_form.recommend.label_tag }}
+                    {{ game_form.recommend }}  <!-- 直接渲染字段 -->
+                </div>
+            </div>
+            <div style="flex: 1;display: flex; flex-direction: column; justify-content: left;">
+                <div style="margin-left: 5px;">
+                    <!-- 缩略图预览 -->
+                    <img id="thumbnail-preview"
+                         src="{{ game_form.instance.thumbnail.url|default:'/avatars/default.png' }}"
+                         alt="Thumbnail Preview"
+                         style="cursor:pointer; width: 350px; height: 350px; object-fit: cover;"
+                         onclick="document.getElementById('thumbnail-input').click();"/>
+                    <input type="file" name="thumbnail" id="thumbnail-input" onchange="updateThumbnail(event)"
+                           style="display:none;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group d-flex align-items-center">
+            {{ game_form.whatis.label_tag }}
+            {{ game_form.whatis }}  <!-- 直接渲染字段 -->
+            <button id="whathow">生成whatis和howtoplay</button>
+        </div>
+
+        <div class="form-group d-flex align-items-center">
+            {{ game_form.HowtoPlay.label_tag }}
+            {{ game_form.HowtoPlay }}  <!-- 直接渲染字段 -->
+        </div>
+
+        <!-- 问题表单 -->
+        <h3>编辑问题</h3>
+        {% for question in questions %}
+            <div class="form-group">
+                <label>问题 {{ forloop.counter }}:</label>
+                <input type="text" name="question_{{ question.nid }}" value="{{ question.question }}"
+                       class="form-control"/>
+                <input type="text" name="answer_{{ question.nid }}" value="{{ question.answer }}" class="form-control"/>
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">保存游戏和问题</button>
+    </form>
+
+    <script>
+        function updateThumbnail(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.getElementById('thumbnail-preview');
+                img.src = e.target.result; // 更新缩略图预览
+            }
+            reader.readAsDataURL(file);
+        }
+    </script>
+    <script>
+        $('#whathow').on('click', function (event) {
+            event.preventDefault(); // 防止按钮默认提交行为
+            const titleValue = $('#id_title').val(); // 获取输入框的值
+            // 获取 CSRF Token
+            const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+            $.ajax({
+
+                url: '/generate_whathow2/',
+                type: 'POST',  // 请求方法
+                data: {
+                    title: titleValue,
+                    csrfmiddlewaretoken: csrfToken,
+                },
+                dataType: 'json',
+                success: function (response) {
+                    // 成功回调：处理返回的 JSON 数据
+                    if (response) {
+                        console.log(response);
+                        $('#id_whatis').val(response.whatis); // 将返回的 'whatis' 字段值赋给 id_whatis 输入框
+                        $('#id_HowtoPlay').val(response.howtoplay); // 将返回的 'howtoplay' 字段值赋给 id_HowtoPlay 输入框
+                    } else {
+                        console.log('Response does not contain the expected "id_whatis or id_HowtoPlay" field');
+                    }
+                },
+                error: function (error) {
+                    // 错误回调：请求失败时执行
+                    console.log('Request failed: ', error);
+                }
+            });
+
+
+        });
+        $('#description').on('click', function (event) {
+            event.preventDefault(); // 防止按钮默认提交行为
+            const desValue = $('#id_description').val(); // 获取输入框的值
+            {#console.log(desValue)#}
+            // 获取 CSRF Token
+            const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+            {#$('#id_description').val("");#}
+            $.ajax({
+
+                url: '/generate_description/',
+                type: 'POST',  // 请求方法
+                data: {
+                    description: desValue,
+                    csrfmiddlewaretoken: csrfToken,
+                },
+                dataType: 'json',
+                success: function (response) {
+                    // 成功回调：处理返回的 JSON 数据
+                    if (response) {
+                        console.log(response);
+                        $("label[for='id_description']").css("color", "green");
+                        $('#id_description').val(response.description); // 将返回的 'description' 字段值赋给 id_description 输入框
+                    } else {
+                        console.log('Response does not contain the expected "id_description" field');
+                    }
+                },
+                error: function (error) {
+                    // 错误回调：请求失败时执行
+                    console.log('Request failed: ', error);
+                }
+            });
+
+
+        });
+        $(document).ready(function () {
+            $('#gamename').click(function (e) {
+                // 替换成你要打开的网址
+                e.preventDefault();
+                let gamename = $('#id_title').val();
+                window.open("https://www.google.com/search?q=" + encodeURIComponent(gamename), "_blank");
+
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

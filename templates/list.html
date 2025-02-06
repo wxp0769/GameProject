@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="game-page">
+        <div class="container">
+            <div class="bz w-full big-title">
+                <div class="w-full h-full inside">
+                    <div class="box"><h1 class="home-title">{{ site.title }} Games</h1>
+                        <div class="tab">
+                            {{ site.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bz main-container">
+                <div class="throw-game">
+                    <div class="list-games-item">
+                        <div id="ajax-append">
+                            <div class="w-full text-center foreach">
+                                {% for game in game_list %}
+                                    <div class="bz game">
+                                        <a href="/game/{{ game.slug }}" class="d-block game-a">
+                                            <img class="d-block"
+                                                 width="190"
+                                                 height="185"
+                                                 src="/media/{{ game.thumbnail }}"
+                                                 alt="{{ game.title }}"
+                                                 title="{{ game.title }}"/>
+                                            <div class="bz w-full ab-info">
+                                                <span class="text-overflow title-game">{{ game.title }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="pagination">
+                                <div class="s_paging">
+                                    {{ page_string }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

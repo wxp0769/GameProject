@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="content-language" content="en">
+    <meta name="external" content="true">
+    <meta name="distribution" content="Global">
+    <meta http-equiv="audience" content="General">
+    <meta name="theme-color" content="#ffeee1">
+    <meta name="resource-type" content="Game"/>
+    <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} -
+        {{ site.title }}{% else %} {{ about_title }}{% endif %}</title>
+    <meta name="description" content="{% if index == 1 %}{{ site.description }}{% else %}{{ game_obj.description }}{% endif %}">
+    <link rel="icon" href="/media/{{ game_obj.thumbnail }}">
+    <link rel="stylesheet" type="text/css" href="/static/css/all_way.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+{#    <script>#}
+{#        window.dataLayer = window.dataLayer || [];#}
+{##}
+{#        function gtag() {#}
+{#            dataLayer.push(arguments);#}
+{#        }#}
+{##}
+{#        gtag('js', new Date());#}
+{#        gtag('config', 'G-aGJ9DVX6a');#}
+{#    </script>#}
+    <style>.list_menu {
+        height: 62px;
+    }
+
+    .inside {
+        padding: 15px 5px;
+    }</style>
+</head>
+<body>
+<div class="p-r papers">
+    <div class="w-full p-r menu">
+        <div class="container">
+            <div class="bz d-flex al sp list_menu">
+                <div id="show-menu" class="ab-menu">
+                    <svg fill="var(--color-white)" height="24px" viewBox="0 -21 384 384" width="24px"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="m362.667969 0h-341.335938c-11.753906 0-21.332031 9.578125-21.332031 21.332031v42.667969c0 11.753906 9.578125 21.332031 21.332031 21.332031h341.335938c11.753906 0 21.332031-9.578125 21.332031-21.332031v-42.667969c0-11.753906-9.578125-21.332031-21.332031-21.332031zm0 0"/>
+                        <path d="m362.667969 128h-341.335938c-11.753906 0-21.332031 9.578125-21.332031 21.332031v42.667969c0 11.753906 9.578125 21.332031 21.332031 21.332031h341.335938c11.753906 0 21.332031-9.578125 21.332031-21.332031v-42.667969c0-11.753906-9.578125-21.332031-21.332031-21.332031zm0 0"/>
+                        <path d="m362.667969 256h-341.335938c-11.753906 0-21.332031 9.578125-21.332031 21.332031v42.667969c0 11.753906 9.578125 21.332031 21.332031 21.332031h341.335938c11.753906 0 21.332031-9.578125 21.332031-21.332031v-42.667969c0-11.753906-9.578125-21.332031-21.332031-21.332031zm0 0"/>
+                    </svg>
+                </div>
+                <div class="bz logo">
+                    <a href="{{ site.site_url }}">
+                        <img width="" height="54" src="/media/{{ site.logo }}" alt="{{ site.site_name }}"
+                             title="{{ site.site_name }}">
+                    </a>
+                </div>
+                <div class="menu-header">
+                    <div class="h-full d-r-flex">
+                        {% for item in top_menus %}
+                            <a class="d-flex al header-item"
+                               href="{% url 'singleGame' slug=item.slug %}">{{ item.title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#                <div class="p-r search-box">#}
+                {#                    <div id="list-suggest" class="link-suggest"></div>#}
+                {#                </div>#}
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    <div class="overlay-full"></div>
+    <div class="mobile-menu">
+        <div class="p-r top-close-mobile">
+            <div class="close-mobile">
+                <svg fill="var(--color-white)" height="24px" viewBox="0 0 365.696 365.696" width="24px"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="m243.1875 182.859375 113.132812-113.132813c12.5-12.5 12.5-32.765624 0-45.246093l-15.082031-15.082031c-12.503906-12.503907-32.769531-12.503907-45.25 0l-113.128906 113.128906-113.132813-113.152344c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503907-12.5 32.769531 0 45.25l113.152344 113.152344-113.128906 113.128906c-12.503907 12.503907-12.503907 32.769531 0 45.25l15.082031 15.082031c12.5 12.5 32.765625 12.5 45.246093 0l113.132813-113.132812 113.128906 113.132812c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082031c12.5-12.503906 12.5-32.769531 0-45.25zm0 0"/>
+                </svg>
+            </div>
+        </div>
+        <div class="list_mobile_menu"><a class="mobile-header-item" href="/">Home</a><a class="mobile-header-item"
+                                                                                        href="/games/puzzle-games">Puzzle
+            Games</a><a class="mobile-header-item" href="/games/block-games">Block Games</a><a
+                class="mobile-header-item" href="/new-games">New Games</a><a class="mobile-header-item"
+                                                                             href="/hot-games">Hot Games</a><a
+                class="mobile-header-item" id="recent-game-mobible" onclick="recentGame(event)" href="/recent">recent
+            game</a></div>
+    </div>
+    {% block content %}
+        内容区域
+    {% endblock %}
+    <div class="footer">
+        <div class="bz text-center links">
+            <a class="link" href="/about-us">About Us</a>
+            <a class="link" href="/copyright">Copyright</a>
+            <a class="link" href="/contact-us">Contact us</a>
+            <a class="link" href="/privacy-policy">Privacy policy</a>
+            <a class="link" href="/term-of-use">Term of use</a>
+        </div>
+    </div>
+    <span id="back-to-top" title="Back to top" class="d-flex al show" style="cursor:pointer;">↑</span>
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/js/jquery.validate.min.js"></script>
+    <script src="/static/js/footer.js"></script>
+</div>
+</body>
+</html>

@@ -22,9 +22,48 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', views.game),
-    path('', views.game),
-    path('game/', views.game),
+    path('index/', views.index),
+    path('', views.guanli),
+    path('game/<slug:slug>/', views.game, name='singleGame'),
+    path('play/<slug:slug>/', views.iframe_play, name='gamePlay'),
+    path('games/', views.gameList, name='gameList'),
+
+    # <表单页面路由开始
+    path('guanli/', views.guanli, name='guanli'),
+    path('createsite/', views.create_Site, name='create_Site'),
+    path('editsite/', views.edit_Site, name='edit_Site'),
+    path('game_list/', views.game_list, name='game_list'),
+    path('delete/<int:game_id>', views.del_game, name='del_game'),
+    path('addgame/', views.add_game, name='add_game'),
+    path('editgame/<int:game_id>', views.edit_game, name='edit_game'),
+    # >表单页面路由结束
+
+    # <静态页路由开始
+    path("generate_index/", views.generate_index_html, name="generate_index"),  # 生成首页静态html文件
+    path("generate_game/<int:game_id>/", views.generate_game_html, name="generate_game"),  # 生成单个游戏页静态html文件
+    path("generate_allgame/", views.generate_allgame_html, name="generate_allgame"),  # 生成所有游戏页静态html文件
+    path("generate_list/", views.gameList_html, name="generate_list"),  # 生成所有游戏页静态html文件
+    path("generate_allpage_html/", views.generate_allpage_html, name="generate_allpage_html"),  # 生成所有游戏页静态html文件
+    # >静态页路由结束
+
+    # 生成问题及答案开始
+    path("generate_QandA/<int:game_id>/", views.generate_QandA, name="generate_QandA"),
+    path("generate_whathow/<int:game_id>/", views.generate_whathow, name="generate_whathow"),
+    path("generate_whathow2/", views.generate_whathow2, name="generate_whathow2"),
+    path("generate_description/", views.generate_description, name="generate_description"),
+    # 生成问题及答案结束
+
+    # 生成About开始
+    path("generate_aboutus/", views.aboutus_html, name="aboutus_html"),
+    # 生成About结束
+
+    # <footer路由
+    path('about-us/', views.aboutus, name='aboutus'),
+    path('copyright/', views.copyright, name='copyright'),
+    path('contact-us/', views.contactus, name='contactus'),
+    path('privacy-policy/', views.privacypolicy, name='privacypolicy'),
+    path('term-of-use/', views.termofuse, name='termofuse'),
+    # footer路由>
     # 其他路由
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]

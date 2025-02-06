@@ -7,3 +7,6 @@ INSTALLED_APPS = [
     ...
     'game',
 ]
+
+api key:
+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

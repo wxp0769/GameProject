@@ -126,6 +126,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"  # 上传文件的路径
 # 可选：CKEditor 配置
@@ -143,3 +144,6 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': ','.join(['image2']),  # 确保启用了图片上传插件
     },
 }
+
+# 生成的静态 HTML 文件存储路径
+STATIC_GAMES_DIR = os.path.join(BASE_DIR, "static_games")

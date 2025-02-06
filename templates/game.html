@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="game-page" class="game_play">
+        <div class="containing">
+            <div class="p-r throw-game">
+                <div class="game-frame">
+                    <div class="show-more-game left-game">
+                        <div class="on-game">
+                            {% for game in recommend_gamelist_L %}
+                                <div class="game-more-relate">
+                                    <a href="{% url 'singleGame' slug=game.slug %}" class="d-block game-a">
+                                        <img class="d-block" width="105" height="100"
+                                             src="/media/{{ game.thumbnail }}" alt="{{ game.title }}"
+                                             title="{{ game.title }}">
+                                        <span class="text-overflow game-more-title">{{ game.title }}</span>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="iframe">
+                        <iframe id="iframehtml5" width="100%" title="{{ game_obj.title }}" height="500"
+                                src="{% url 'gamePlay' slug=game_obj.slug %}" frameborder="0" border="0"
+                                scrolling="no" class="iframe-default" allowfullscreen="">
+                        </iframe>
+                        <div class="header-game">
+                            <div class="box-header">
+                                <div id="append-rate" class="game-full-rate"></div>
+                                <div class="header-game-extend">
+                                    <span class="us-expand" id="half-expand" onclick="theaterMode()">
+                                        <svg width="24" height="24" viewBox="0 0 100 100"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                             class="iconify iconify--gis" preserveAspectRatio="xMidYMid meet">
+                                            <path d="M8.5 22.5A3.5 3.5 0 0 0 5 26v48a3.5 3.5 0 0 0 3.5 3.5h83A3.5 3.5 0 0 0 95 74V26a3.5 3.5 0 0 0-3.5-3.5h-83zm3.5 7h76v41H12v-41z"></path></svg></span><span
+                                        class="expand-btn" id="expand"><svg version="1.1" x="0px" y="0px" viewBox="0 0 384.97 384.97" style="enable-background:new 0 0 384.97 384.97;" xml:space="preserve"><g><g id="Fullscreen"><path d="M384.97,12.03c0-6.713-5.317-12.03-12.03-12.03H264.847c-6.833,0-11.922,5.39-11.934,12.223 c0,6.821,5.101,11.838,11.934,11.838h96.062l-0.193,96.519c0,6.833,5.197,12.03,12.03,12.03c6.833-0.012,12.03-5.197,12.03-12.03 l0.193-108.369c0-0.036-0.012-0.06-0.012-0.084C384.958,12.09,384.97,12.066,384.97,12.03z" />
+                                    <path d="M120.496,0H12.403c-0.036,0-0.06,0.012-0.096,0.012C12.283,0.012,12.247,0,12.223,0C5.51,0,0.192,5.317,0.192,12.03 L0,120.399c0,6.833,5.39,11.934,12.223,11.934c6.821,0,11.838-5.101,11.838-11.934l0.192-96.339h96.242 c6.833,0,12.03-5.197,12.03-12.03C132.514,5.197,127.317,0,120.496,0z"/><path
+                                            d="M120.123,360.909H24.061v-96.242c0-6.833-5.197-12.03-12.03-12.03S0,257.833,0,264.667v108.092 c0,0.036,0.012,0.06,0.012,0.084c0,0.036-0.012,0.06-0.012,0.096c0,6.713,5.317,12.03,12.03,12.03h108.092 c6.833,0,11.922-5.39,11.934-12.223C132.057,365.926,126.956,360.909,120.123,360.909z"/><path
+                                            d="M372.747,252.913c-6.833,0-11.85,5.101-11.838,11.934v96.062h-96.242c-6.833,0-12.03,5.197-12.03,12.03 s5.197,12.03,12.03,12.03h108.092c0.036,0,0.06-0.012,0.084-0.012c0.036-0.012,0.06,0.012,0.096,0.012 c6.713,0,12.03-5.317,12.03-12.03V264.847C384.97,258.014,379.58,252.913,372.747,252.913z"/></g></g></svg></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="exit-fullscreen hidden" id="_exit_full_screen">
+                            <svg fill="#fff" width="24" height="24" version="1.1"
+                                 id="Capa_1" x="0px" y="0px" viewBox="0 0 512.001 512.001"
+                                 style="enable-background:new 0 0 512.001 512.001;">
+                                <g><g>
+                                <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717 L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859 c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287 l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285 L284.286,256.002z"/></g></g>
+                            </svg>
+                        </span>
+                        <div class="close-sharing-box" onclick='closeBox()'></div>
+                        <script>function theaterMode() {
+                            let iframe = document.querySelector("#iframehtml5");
+                            if (iframe.classList.contains("force_half_full_screen")) {
+                                iframe.classList.remove("force_half_full_screen");
+                                document.body.style.overflow = "unset";
+                                document.querySelector(".header-game").classList.remove("header_game_enable_half_full_screen");
+                            } else {
+                                let above = 0;
+                                let left = 0;
+                                let below = document.querySelector(".header-game").clientHeight;
+                                let right = 0;
+                                // let width = window.innerWidth;
+                                // let height = window.innerHeight;
+                                if (!document.querySelector("#style-append")) {
+                                    let styleElement = document.createElement("style");
+                                    styleElement.type = "text/css";
+                                    styleElement.setAttribute('id', "style-append");
+                                    let cssCode = `
+                                                    .force_half_full_screen{
+                                                    position: fixed!important;
+                                                    top: 0!important;
+                                                    left: 0!important;
+                                                    z-index: 887;
+                                                    top:${above}px!important;
+                                                    left:${left}px!important;
+                                                    width:calc(100% - ${left}px)!important;
+                                                    height:calc(100% - ${above + below}px)!important;
+                                                    background-color:#000;
+                                                    }
+                                                    .header_game_enable_half_full_screen{
+                                                        position:fixed;
+                                                        left:${left}px!important;
+                                                        bottom:0!important;
+                                                        right:0!important;
+                                                        z-index:887!important;
+                                                        width:calc(100% - ${left}px)!important;
+                                                        padding-left:10px;
+                                                        padding-right:10px;
+                                                    }
+                                                    @media (max-width: 1364px){
+                                                        .force_half_full_screen{
+                                                            left:0!important;
+                                                            width:100%!important;
+                                                        }
+                                                        .header_game_enable_half_full_screen{
+                                                            width:100%!important;
+                                                            left:0!important;
+                                                        }
+                                                    }`
+                                    styleElement.innerHTML = cssCode;
+                                    document.querySelector('head').appendChild(styleElement);
+                                }
+                                document.body.style.overflow = "hidden";
+                                iframe.classList.add("force_half_full_screen")
+                                document.querySelector(".header-game").classList.add("header_game_enable_half_full_screen")
+                            }
+                        }
+                        </script>
+                    </div>
+                    <div class="show-more-game right-game">
+                        <div class="on-game">
+                            {% for game in recommend_gamelist_R %}
+                                <div class="game-more-relate">
+                                    <a href="{% url 'singleGame' slug=game.slug %}" class="d-block game-a">
+                                        <img class="d-block" width="105" height="100"
+                                             src="/media/{{ game.thumbnail }}" alt="{{ game.title }}"
+                                             title="{{ game.title }}">
+                                        <span class="text-overflow game-more-title">{{ game.title }}</span>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="p-r relate-box">
+                    <div class="container">
+                        <div class="w-full text-center foreach">
+                            {% for game in newgames %}
+                                <div class="bz game">
+                                    <a href="{% url 'singleGame' slug=game.slug %}"
+                                       class="d-block game-a">
+                                        <img class="d-block" width="190" height="185"
+                                             src="/media/{{ game.thumbnail }}"
+                                             alt="{{ game.title }}" title="{{ game.title }}">
+                                        <div class="bz w-full ab-info">
+                                            <span class="text-overflow title-game">{{ game.title }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-games">
+                    <div class="bz group-b game-info">
+                        <div class="bread-crumb">
+                            <div class="overwrite-breadcumb">
+                                <div class="d-flex al bread-crumb-list">
+                                    <a href="/" class="d-flex bread-crumb-item">Home</a>
+                                    <a href="{% url 'gameList' %}" class="bread-crumb-item bread-after">Games</a>
+                                    <span class="bread-crumb-item bread-after">{{ game_obj.title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h1>{{ game_obj.title }}</h1>
+                        <h2 style="text-align: justify;">What is {{ game_obj.title }}?</h2>
+                        {{ game_obj.whatis|safe }}
+                        <p><img src="/media/{{ game_obj.thumbnail }}" alt="{{ game_obj.title }}"
+                                width="300" height="300" loading="lazy"/></p>
+                        <h2 style="text-align: justify;">How to play {{ game_obj.title }}?</h2>
+                        {{ game_obj.HowtoPlay|safe }}
+                    </div>
+                    <div class="bz group-b game-info">
+                        <div class="title-option">Discuss About {{ game_obj.title }}</div>
+                        <div id="append-comment">
+                            {% for qa in QandA %}
+                                <h3 style="text-align: justify;">Q{{ forloop.counter }} : {{ qa.question }}?</h3>
+                                A{{ forloop.counter }} : {{ qa.answer|safe }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

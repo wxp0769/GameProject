@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏列表</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* 添加交替行背景颜色和行高 */
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #e5e7eb; /* Bootstrap 默认的浅灰色 */
+        }
+
+        .table-striped tbody tr:nth-child(even) {
+            background-color: #ffffff; /* Bootstrap 默认的更深灰色 */
+        }
+
+        .table tbody tr td {
+            height: 30px !important; /* 行高调整为30px，使用 !important 强制应用 */
+        }
+
+        .next_page {
+            display: inline-block;
+            padding: 10px 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-right: 5px;
+            cursor: pointer;
+            background-color: silver;
+            color: #000000;
+        }
+
+        .next_page:hover {
+            background-color: #000;
+            color: #fff
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4">游戏列表</h1>
+    <table class="table table-striped" style="border: 1px solid #dee2e6;">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>发布</th>
+            <th>标题</th>
+            <th>推荐等级</th>
+            <th>操作</th>
+            <th>AI生成问题及答案</th>
+            <th>AI生成what&how</th>
+            <th>静态化</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in game_list %}
+            <tr>
+                <td>{{ game.nid }}</td>
+                <td>
+                    <input type="checkbox" name="is_checked" value="1" {% if game.is_checked %}checked{% endif %}>
+                </td>
+                <td>{{ game.title }}</td>
+                <td>{{ game.recommend }}</td>
+                <td>
+                    <a href="/editgame/{{ game.nid }}" class="btn-primary">编辑</a>
+                    <a href="/delete/{{ game.nid }}" class="btn-danger">删除</a>
+                </td>
+                <td>
+
+                    {% if game.questions_set.all %}
+                        <a href="/generate_QandA/{{ game.nid }}" class="btn-success">✅已生成问题及答案</a>
+                    {% else %}
+                        <a href="/generate_QandA/{{ game.nid }}" class="btn-danger">❌未生成问题及答案</a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if game.whatis %}
+                        <a href="/generate_whathow/{{ game.nid }}" class="btn-success">✅已生成what&how</a>
+                    {% else %}
+                        <a href="/generate_whathow/{{ game.nid }}" class="btn-primary">❌未生成what&how</a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/generate_game/{{ game.nid }}" class="btn-success">生成Html</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination justify-content-center">
+        {{ page_string }}
+    </div>
+</div>
+</body>
+</html>

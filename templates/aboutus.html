@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>.for-information {
+        width: 100%;
+        color: #222;
+        min-height: 80vh;
+        line-height: 2;
+        font-size: 15px;
+    }
+
+    .for-information h1 {
+        font-size: 24px;
+        color: inherit;
+        font-weight: bold;
+    }
+
+    .for-information h2, .for-information h3, .for-information h4 {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .for-information p {
+        font-size: 15px;
+    }
+
+    .for-information a {
+        color: #007bff;
+    }
+
+    .full-information {
+        background-color: #fff;
+        overflow: hidden;
+    }
+
+    .pad-info {
+        padding: 15px;
+        box-sizing: border-box;
+    }</style>
+    <div id="game-page">
+        <div class="containing">
+            <div class="row">
+                <div class="text-area">
+                    <div class="top-header">
+                        <h1 class="home-title">{{ about_title}}</h1>
+                        {{ site.aboutus|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
