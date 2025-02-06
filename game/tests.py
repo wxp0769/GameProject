@@ -26,7 +26,7 @@ if repo.is_dirty(untracked_files=True):
     repo.git.add(A=True)  # 等同于 `git add .`
 
     # 提交更改
-    commit_message = "Auto-commit: 更新了文件"
+    commit_message = "使用python脚本更新了文件"
     repo.index.commit(commit_message)
     print("✅ 提交成功:", commit_message)
     # 推送更改到远程仓库
