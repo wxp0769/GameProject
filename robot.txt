@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /game/
+Disallow: /H5game/
+Disallow: /manage.py
+Disallow: /.idea
+Disallow: /*.bat
+Allow: /
+Sitemap: https://cargames-unblocked.com/sitemap.xml
