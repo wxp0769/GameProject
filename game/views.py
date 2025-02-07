@@ -618,7 +618,7 @@ def generate_description(request):
                 # 这里可以根据传递的 title 值进行处理
                 # 假设你处理了 title 并生成了 whathow 内容
                 prompts = f"""    
-                    1)把下面的英文重新组织一下，使之更有利于google SEO:
+                    1)把下面的英文重新组织一下，字符数控制在300以内，使之更有利于google SEO:
                     {description}
                     2)把返回的答案赋值给description,然后组成一个json返回
                     """

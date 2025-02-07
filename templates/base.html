@@ -9,9 +9,8 @@
     <meta http-equiv="audience" content="General">
     <meta name="theme-color" content="#ffeee1">
     <meta name="resource-type" content="Game"/>
-    <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} -
-        {{ site.title }}{% else %} {{ about_title }}{% endif %}</title>
-    <meta name="description" content="{% if index == 1 %}{{ site.description }}{% else %}{{ game_obj.description }}{% endif %}">
+    <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %} {{ about_title }}{% endif %}</title>
+    <meta name="description" content="{% if index == 1 %}{{ site.description }}{% elif index == 2 %}{{ game_obj.description }}{% else %}{{ about_title }}{% endif %}">
     <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
     <link rel="stylesheet" type="text/css" href="/static/css/all_way.css">

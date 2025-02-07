@@ -10,8 +10,8 @@
     <meta name="theme-color" content="#ffeee1">
     <meta name="resource-type" content="Game"/>
     <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}</title>
-    <meta name="description" content="{{ game_obj.description }}">
     <meta name="title" content="{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}">
+    <meta name="description" content="{% if index == 1 %}{{ site.description }}{% elif index == 2 %}{{ game_obj.description }}{% else %}{{ about_title }}{% endif %}">
     <link rel="icon" href="./static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./static/css/all_way.css">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
