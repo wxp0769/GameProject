@@ -6,7 +6,7 @@ import requests
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"  # 注意这里使用了正确的 /chat/completions
 
 # 替换为你的 OpenRouter API 密钥
-API_KEY = "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"
+API_KEY = "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"
 
 # def interact_with_openrouter(prompts):
 #     headers = {

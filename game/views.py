@@ -458,8 +458,8 @@ def edit_Site(request):
     return render(request, 'admin/edit_site.html', {'site': site, 'form': form})
 
 
-def game_list(request):
-    game_list = models.Game.objects.all()
+def game_list(request):# 未审核的游戏
+    game_list = models.Game.objects.filter(is_checked=False)
     page_object = Pagination(request, game_list, page_size=15)
     context = {
         "game_list": page_object.page_queryset,  # 分完页的数据
@@ -468,6 +468,15 @@ def game_list(request):
 
     return render(request, 'admin/game_list.html', context)
 
+def game_list_checked(request):# 已审核的游戏
+    game_list = models.Game.objects.filter(is_checked=True)
+    page_object = Pagination(request, game_list, page_size=15)
+    context = {
+        "game_list": page_object.page_queryset,  # 分完页的数据
+        'page_string': page_object.html(),  # 页码
+    }
+
+    return render(request, 'admin/game_list.html', context)
 
 def add_game(request):
     if request.method == 'POST':
@@ -549,6 +558,7 @@ def generate_QandA(request, game_id):
     # "用英文生成8个关于" + game.title + "游戏的问题及答案，把每个问题赋值给Question,把每个答案赋值给Answer，把每个Question和对应的Answer组成一个字典，再把字典作为元素放到一个list中")
 
     qas_str = interact_with_openrouter(prompts)
+    print(qas_str)
     print(type(qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0]),qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0])
     qas_str = '[' + qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0] + ']'
     print(type(qas_str),qas_str)
@@ -576,6 +586,7 @@ def generate_whathow(request, game_id):
     game_info=json.loads(game_info)
     if game_info:
         game = Game.objects.get(nid=game_id)
+        print(game_info)
         game.whatis=game_info[0]["whatis"]
         game.HowPlay=game_info[0]["howtoplay"]
         game.save()
