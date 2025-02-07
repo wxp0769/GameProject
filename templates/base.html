@@ -13,20 +13,23 @@
         {{ site.title }}{% else %} {{ about_title }}{% endif %}</title>
     <meta name="description" content="{% if index == 1 %}{{ site.description }}{% else %}{{ game_obj.description }}{% endif %}">
     <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
     <link rel="stylesheet" type="text/css" href="/static/css/all_way.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-{#    <script>#}
-{#        window.dataLayer = window.dataLayer || [];#}
-{##}
-{#        function gtag() {#}
-{#            dataLayer.push(arguments);#}
-{#        }#}
-{##}
-{#        gtag('js', new Date());#}
-{#        gtag('config', 'G-aGJ9DVX6a');#}
-{#    </script>#}
+    <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "VideoGame",
+              "name": "{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}",
+              "image": "/media/{{ game_obj.thumbnail }}",
+              "description": "{{ game_obj.description }}",
+              "genre": ["Racing", "Driving","Drifting"],
+              "gamePlatform": ["Web","Mobile"],
+              "applicationCategory": "Game",
+            }
+    </script>
     <style>.list_menu {
         height: 62px;
     }

@@ -9,27 +9,29 @@
     <meta http-equiv="audience" content="General">
     <meta name="theme-color" content="#ffeee1">
     <meta name="resource-type" content="Game"/>
-    <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} -
-        {{ site.title }}{% else %}{{ about_title }}{% endif %}</title>
+    <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}</title>
     <meta name="description" content="{{ game_obj.description }}">
-    <meta name="title" content="{% if index == 1 %}{{ site.site_name }} -
-
-
-        {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}">
+    <meta name="title" content="{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}">
     <link rel="icon" href="./static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./static/css/all_way.css">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script>window.dataLayer = window.dataLayer || [];
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoGame",
+          "name": "{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}",
+          "image": "/{{ game_obj.thumbnail }}",
+          "description": "{{ game_obj.description }}",
+          "genre": ["Racing", "Driving","Drifting"],
+          "gamePlatform": ["Web","Mobile"],
+          "applicationCategory": "Game",
+        }
+    </script>
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
 
-    gtag('js', new Date());
-
-    gtag('config', '3-99GJ9DVX6E');</script>
     <style>.list_menu {
         height: 62px;
     }</style>

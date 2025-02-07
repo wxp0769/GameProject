@@ -64,6 +64,7 @@ urlpatterns = [
     path('privacy-policy/', views.privacypolicy, name='privacypolicy'),
     path('term-of-use/', views.termofuse, name='termofuse'),
     # footer路由>
+    path("push/", views.pushByGit, name="pushByGit"),
     # 其他路由
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
