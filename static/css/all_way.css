@@ -1405,7 +1405,6 @@ span.bread-crumb-item {
         -ms-flex-wrap: wrap;
         flex-wrap: wrap
     }
-
     #append-rate {
         width: 100%;
         display: -webkit-box;
@@ -1458,11 +1457,11 @@ span.bread-crumb-item {
     width: 20px
 }
 
+
 .rate-info {
     font-size: 18px;
     line-height: 24px
 }
-
 #recent-game, #recent-game-mobile {
     display: none
 }
