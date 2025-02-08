@@ -698,11 +698,10 @@ def pushByGit(request):
         repo.index.commit(commit_message)
         # 推送更改到远程仓库
         repo.git.push("origin", "main")  # 或 "main"
-        items = ''.join(f"- {item}\n" for item in list)
         responsetext=f"""
         下列文件已推送到远程仓库：
         🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀\n
-        {items}
+        {list}
         """
         return HttpResponse(responsetext)
 
