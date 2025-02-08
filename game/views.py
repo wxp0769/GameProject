@@ -698,7 +698,11 @@ def pushByGit(request):
         repo.index.commit(commit_message)
         # 推送更改到远程仓库
         repo.git.push("origin", "main")  # 或 "main"
-        return HttpResponse("🚀 已推送到远程仓库")
+        responsetext="""下列文件已推送到远程仓库：
+        🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+        {list}
+        """
+        return HttpResponse(responsetext)
 
     else:
         return HttpResponse("✅ 没有需要提交的更改")
