@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.forms import inlineformset_factory, modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
-from game.utils.opai import interact_with_openrouter
+from game.utils.opai import interact_with_openrouter,interact_with_openai
 from H5game import settings
 from game import models
 from .models import Game, Questions
@@ -557,15 +557,23 @@ def generate_QandA(request, game_id):
         """
     # "用英文生成8个关于" + game.title + "游戏的问题及答案，把每个问题赋值给Question,把每个答案赋值给Answer，把每个Question和对应的Answer组成一个字典，再把字典作为元素放到一个list中")
 
-    qas_str = interact_with_openrouter(prompts)
-    print(qas_str)
-    print(type(qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0]),qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0])
-    qas_str = '[' + qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0] + ']'
-    print(type(qas_str),qas_str)
-    print('------------------------------------------------------------------------------------------------------------------------------------------------------------')
-    qas_list = json.loads(qas_str)
-    print('------------------------------------------------------------------------------------------------------------------------------------------------------------')
+    # qas_str = interact_with_openrouter(prompts)
+    # print(qas_str)
+    # print(type(qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0]),qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0])
+    # qas_str = '[' + qas_str["choices"][0]["message"]["content"].split('[')[1].split(']')[0] + ']'
+    # print(type(qas_str),qas_str)
+    # print('------------------------------------------------------------------------------------------------------------------------------------------------------------')
+    # qas_list = json.loads(qas_str)
+    # print('------------------------------------------------------------------------------------------------------------------------------------------------------------')
+    # print(qas_list)
+    resp = interact_with_openai(prompts)
+    resp = json.loads(resp)
+    qas_list = resp["choices"][0]["message"]["content"]
+    # qas_list = "[" + ai_res + "]"
     print(qas_list)
+    print('------------------------------------------------------------------------------------------------------------------------------------------------------------')
+    qas_list = json.loads(qas_list)  # 返回一个 JSON 响应
+    print(type(qas_list), qas_list)
     if qas_list:
         Questions.objects.filter(game_id=game.nid).delete()
         for qa in qas_list:
@@ -581,14 +589,21 @@ def generate_whathow(request, game_id):
     2)用英文回答how to play {title} game?字数限制在100words以内
     3)把第一个答案赋值给whatis,第二个答案赋值给howtoplay,然后组成一个json返回
     """
-    ai_res = interact_with_openrouter(prompts)["choices"][0]["message"]["content"]
-    game_info = ai_res.replace("```json","[").replace("```","]")
-    game_info=json.loads(game_info)
+    # ai_res = interact_with_openrouter(prompts)["choices"][0]["message"]["content"]
+    # game_info = ai_res.replace("```json","[").replace("```","]")
+    # game_info=json.loads(game_info)
+    resp = interact_with_openai(prompts)
+    resp = json.loads(resp)
+    ai_res = resp["choices"][0]["message"]["content"]
+    game_info = "[" + ai_res + "]"
+    print(type(ai_res), ai_res)
+    game_info = json.loads(game_info)  # 返回一个 JSON 响应
+    print(type(game_info), game_info)
     if game_info:
         game = Game.objects.get(nid=game_id)
         print(game_info)
         game.whatis=game_info[0]["whatis"]
-        game.HowPlay=game_info[0]["howtoplay"]
+        game.HowtoPlay=game_info[0]["howtoplay"]
         game.save()
     return redirect('/game_list')  # 替换为成功后的重定向URL
 def generate_whathow2(request):
@@ -606,10 +621,17 @@ def generate_whathow2(request):
                     2)用英文回答how to play {title} game?字数限制在100words以内
                     3)把第一个答案赋值给whatis,第二个答案赋值给howtoplay,然后组成一个json返回
                     """
-                ai_res = interact_with_openrouter(prompts)["choices"][0]["message"]["content"]
-                print(ai_res)
-                game_info = ai_res.replace("```json", "[").replace("```", "]")
-                game_info = json.loads(game_info)# 返回一个 JSON 响应
+                # ai_res = interact_with_openrouter(prompts)["choices"][0]["message"]["content"]
+                # print(ai_res)
+                # game_info = ai_res.replace("```json", "[").replace("```", "]")
+                # game_info = json.loads(game_info)# 返回一个 JSON 响应
+                resp = interact_with_openai(prompts)
+                resp = json.loads(resp)
+                ai_res = resp["choices"][0]["message"]["content"]
+                game_info = "[" + ai_res + "]"
+                print(type(ai_res), ai_res)
+                game_info = json.loads(game_info)  # 返回一个 JSON 响应
+                print(type(game_info), game_info)
                 return JsonResponse(game_info[0])
 
             else:
@@ -634,10 +656,16 @@ def generate_description(request):
                     2)把返回的答案赋值给description,然后组成一个json返回
                     """
                 print("------------------------------------------------------------------------------------")
-                ai_res = interact_with_openrouter(prompts)["choices"][0]["message"]["content"]
-                print(ai_res)
-                game_info = ai_res.replace("```json", "[").replace("```", "]")
+                # ai_res = interact_with_openrouter(prompts)["choices"][0]["message"]["content"]
+                # game_info = ai_res.replace("```json", "[").replace("```", "]")
+                # game_info = json.loads(game_info)# 返回一个 JSON 响应
+                resp = interact_with_openai(prompts)
+                resp = json.loads(resp)
+                ai_res = resp["choices"][0]["message"]["content"]
+                game_info = "["+ai_res+"]"
+                print(type(ai_res),ai_res)
                 game_info = json.loads(game_info)# 返回一个 JSON 响应
+                print(type(game_info), game_info)
                 return JsonResponse(game_info[0])
 
             else:

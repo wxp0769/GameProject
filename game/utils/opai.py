@@ -1,7 +1,7 @@
 import re
-
 import requests
-
+import json,time
+from openai import OpenAI
 # OpenRouter API URL
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"  # 注意这里使用了正确的 /chat/completions
 
@@ -69,3 +69,22 @@ def interact_with_openrouter(prompts):
 # result = interact_with_openrouter(prompts)
 # print(type(result["choices"][0]["message"]))
 # print(result["choices"][0]["message"]["content"])
+
+def interact_with_openai(prompts):
+    client = OpenAI(
+        api_key="sk-cllzvgxrzjxyzzxdiwizgzmnprqlolahoyafhvpljgcbeqad", # 从https://cloud.siliconflow.cn/account/ak获取
+        base_url="https://api.siliconflow.cn/v1"
+    )
+    response = client.chat.completions.create(
+            model="deepseek-ai/DeepSeek-V2.5",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant designed to output JSON."},
+                {
+                "role": "user",
+                "content": prompts
+                 }
+            ],
+            response_format={"type": "json_object"}
+        )
+    # print(response.choices[0].message.content)
+    return response.json()

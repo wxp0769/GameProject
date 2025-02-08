@@ -47,7 +47,7 @@ class Game(models.Model):
     # iframeDescription = models.CharField(verbose_name='iframeDescription', max_length=255)
     thumbnail = models.FileField(verbose_name='游戏图片', upload_to=get_file_path, default="/uploads/default.png")
     # GamePageUrl = models.CharField(verbose_name='GamePageUrl', max_length=50)
-    iframeUrl = models.CharField(verbose_name='IFRAME', max_length=100)
+    iframeUrl = models.CharField(verbose_name='IFRAME', max_length=128)
     recommend = models.IntegerField(choices=RECOMMEND_CHOICES, default=0, verbose_name='推荐等级')  # 默认0，1为左边，2为右边，3为首页主游戏
     create_time = models.DateTimeField(verbose_name='create_time', auto_now_add=True)
     update_time = models.DateTimeField(verbose_name='update_time', auto_now_add=True)
