@@ -6,7 +6,7 @@ from pytrends.request import TrendReq
 pytrends = TrendReq(hl='en-US', tz=360)
 
 # 设置搜索关键词（可自定义）
-kw_list = [ "PolyTrack", "Drift Hunters", "Drift Boss"]
+kw_list = [ "Drift Boss", "gpts",]
 
 # 选择时间范围（最近 7 天 或 30 天）
 time_options = {
