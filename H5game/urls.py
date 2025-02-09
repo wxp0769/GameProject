@@ -23,6 +23,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
+    path('', views.index),
     path('htgl/', views.guanli),
     path('game/<slug:slug>/', views.game, name='singleGame'),
     path('play/<slug:slug>/', views.iframe_play, name='gamePlay'),
