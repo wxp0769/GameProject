@@ -9,8 +9,8 @@
     <meta http-equiv="audience" content="General">
     <meta name="theme-color" content="#ffeee1">
     <meta name="resource-type" content="Game"/>
-    <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}</title>
-    <meta name="title" content="{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}">
+    <title>{% if index == 1 or index == 3 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}</title>
+    <meta name="title" content="{% if index == 1 or index == 3 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}">
     <meta name="description" content="{% if index == 1 %}{{ site.description }}{% elif index == 2 %}{{ game_obj.description }}{% else %}{{ about_title }}{% endif %}">
     <link rel="icon" href="./static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./static/css/all_way.css">
@@ -22,7 +22,7 @@
         {
           "@context": "https://schema.org",
           "@type": "VideoGame",
-          "name": "{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}",
+          "name": "{% if index == 1 or index == 3 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}",
           "image": "{{ site.site_url }}/media/{{ game_obj.thumbnail }}",
           "description": "{{ game_obj.description }}",
           "genre": ["Racing", "Driving","Drifting"],

@@ -7,6 +7,9 @@ def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'H5game.settings')
     try:
         from django.core.management import execute_from_command_line
+        # 修改 runserver 默认显示的链接
+        if "runserver" in sys.argv:
+            print("Starting development server at http://localhost:8000/htgl")
     except ImportError as exc:
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "
