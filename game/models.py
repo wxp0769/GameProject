@@ -20,7 +20,7 @@ class Site(models.Model):
     site_name = models.CharField(verbose_name='站点名称', max_length=128)
     logo = models.ImageField(upload_to=get_file_path)
     title = models.CharField(verbose_name='SEO标题', max_length=128)
-    description = models.CharField(verbose_name='站点描述', max_length=255)
+    description = models.CharField(verbose_name='站点描述', max_length=512)
     aboutus = RichTextUploadingField(verbose_name='关于我们', blank=True, null=True)
     copyright = RichTextUploadingField(verbose_name='copyright', blank=True, null=True)
     contactus = RichTextUploadingField(verbose_name='contact us', blank=True, null=True)

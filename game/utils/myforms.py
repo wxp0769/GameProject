@@ -11,7 +11,7 @@ class SiteModelForm(forms.ModelForm):
             'site_url': forms.TextInput(attrs={'class': 'form-control', 'style': 'width: 550px;'}),  # 增加宽度
             'site_name': forms.TextInput(attrs={'class': 'form-control', 'style': 'width: 550px;'}),  # 增加宽度
             'title': forms.TextInput(attrs={'class': 'form-control', 'style': 'width: 550px;'}),  # 增加宽度
-            'description': forms.TextInput(attrs={'class': 'form-control', 'style': 'width: 550px;'}),  # 增加宽度
+            'description': forms.Textarea(attrs={'class': 'form-control', 'style': 'width: 550px;'}),  # 增加宽度
             'aboutus': forms.Textarea(attrs={'class': 'form-control'}),
             'copyright': forms.Textarea(attrs={'class': 'form-control'}),
             'contactus': forms.Textarea(attrs={'class': 'form-control'}),
