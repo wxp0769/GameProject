@@ -1268,7 +1268,6 @@ span.bread-crumb-item {
 .header-game img {
     border-radius: 5px;
 }
-
 .box-header {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1284,13 +1283,11 @@ span.bread-crumb-item {
     align-items: center;
     height: 100%
 }
-
 .box-header h1 {
     font-size: 20px;
     white-space: nowrap;
     text-transform: uppercase
 }
-
 .header-game-extend {
     display: -webkit-box;
     display: -ms-flexbox;

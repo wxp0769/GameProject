@@ -212,6 +212,7 @@ def gameList(request):
         'page_string': page_object.html(),  # 页码
         "site": site,
         "top_menus": top_menus,
+        "index": 3,
     }
     return render(request, "list.html", context)
 
@@ -231,6 +232,7 @@ def gameList_html(request):  # 分类页html
             "page_obj": page_obj,  # 分完页的数据
             "site": site,
             "top_menus": top_menus,
+            "index": 3,
         }
         html_content = render_to_string('static/list.html', context)  # 渲染模板
 
