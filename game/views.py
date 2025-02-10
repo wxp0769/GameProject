@@ -471,7 +471,7 @@ def game_list(request):# 未审核的游戏
     return render(request, 'admin/game_list.html', context)
 
 def game_list_checked(request):# 已审核的游戏
-    game_list = models.Game.objects.filter(is_checked=True)
+    game_list = models.Game.objects.filter(is_checked=True).order_by('-nid')
     page_object = Pagination(request, game_list, page_size=15)
     context = {
         "game_list": page_object.page_queryset,  # 分完页的数据
@@ -608,6 +608,8 @@ def generate_whathow(request, game_id):
         game.HowtoPlay=game_info[0]["howtoplay"]
         game.save()
     return redirect('/game_list')  # 替换为成功后的重定向URL
+
+#ajax调用AI
 def generate_whathow2(request):
 
     if request.method == 'POST':
@@ -676,6 +678,7 @@ def generate_description(request):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Invalid method'}, status=405)
+#ajax调用AI
 
 import git
 from datetime import datetime
