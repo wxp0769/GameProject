@@ -21,7 +21,7 @@
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
-          "@type": "VideoGame",
+          "@type": "Game",
           "name": "{% if index == 1 or index == 3 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}",
           "image": "{{ site.site_url }}/media/{{ game_obj.thumbnail }}",
           "description": "{{ game_obj.description }}",
