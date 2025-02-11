@@ -6,7 +6,10 @@ from django.core.paginator import Paginator
 from django.forms import inlineformset_factory, modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
-from game.utils.opai import interact_with_openrouter,interact_with_openai
+from django.urls import reverse
+from django.utils import timezone
+
+from game.utils.opai import interact_with_openrouter, interact_with_openai
 from H5game import settings
 from game import models
 from .models import Game, Questions
@@ -22,18 +25,18 @@ def siteinfo():
 
 
 def menus():
-    top_menus = models.Game.objects.filter(recommend=4,is_checked=1)[:8]
+    top_menus = models.Game.objects.filter(recommend=4, is_checked=1)[:8]
     return top_menus
 
 
 def get_recommend_games():
-    game_list_L = models.Game.objects.filter(recommend=1,is_checked=1)[:6]
-    game_list_R = models.Game.objects.filter(recommend=2,is_checked=1)[:6]
+    game_list_L = models.Game.objects.filter(recommend=1, is_checked=1)[:6]
+    game_list_R = models.Game.objects.filter(recommend=2, is_checked=1)[:6]
     return game_list_L, game_list_R
 
 
 def new_games():
-    game_list = models.Game.objects.all().filter(is_checked=1,recommend=0).order_by('-create_time')[:12]
+    game_list = models.Game.objects.all().filter(is_checked=1, recommend=0).order_by('-create_time')[:12]
     return game_list
 
 
@@ -47,7 +50,7 @@ def iframe_play(request, slug):
 
 
 def index(request):
-    game_obj = models.Game.objects.filter(recommend=3,is_checked=1).first()
+    game_obj = models.Game.objects.filter(recommend=3, is_checked=1).first()
     if game_obj is None:
         game_obj = models.Game.objects.all().first()
     recommend_gamelist_L, recommend_gamelist_R = get_recommend_games()
@@ -90,7 +93,7 @@ def game(request, slug):
 
 def generate_index_html(request):  # 生成静态html文件
     # 获取游戏对象
-    game_obj = models.Game.objects.filter(recommend=3,is_checked=1).first()
+    game_obj = models.Game.objects.filter(recommend=3, is_checked=1).first()
     if not game_obj:
         return HttpResponse("游戏不存在", status=404)
 
@@ -143,7 +146,7 @@ def generate_index_html(request):  # 生成静态html文件
 
 def generate_game_html(request, game_id):  # 生成静态html文件
     # 获取游戏对象
-    game_obj = Game.objects.filter(nid=game_id,is_checked=1).first()
+    game_obj = Game.objects.filter(nid=game_id, is_checked=1).first()
     if not game_obj:
         return HttpResponse("游戏不存在", status=404)
 
@@ -252,6 +255,7 @@ def generate_allpage_html(request):
     contactus_html(request)
     privacypolicy_html(request)
     termofuse_html(request)
+    generate_sitemap(request)
     return HttpResponse(f"全站静态 HTML 文件已生成")
 
 
@@ -460,7 +464,7 @@ def edit_Site(request):
     return render(request, 'admin/edit_site.html', {'site': site, 'form': form})
 
 
-def game_list(request):# 未审核的游戏
+def game_list(request):  # 未审核的游戏
     game_list = models.Game.objects.filter(is_checked=False)
     page_object = Pagination(request, game_list, page_size=15)
     context = {
@@ -470,7 +474,8 @@ def game_list(request):# 未审核的游戏
 
     return render(request, 'admin/game_list.html', context)
 
-def game_list_checked(request):# 已审核的游戏
+
+def game_list_checked(request):  # 已审核的游戏
     game_list = models.Game.objects.filter(is_checked=True).order_by('-nid')
     page_object = Pagination(request, game_list, page_size=15)
     context = {
@@ -479,6 +484,7 @@ def game_list_checked(request):# 已审核的游戏
     }
 
     return render(request, 'admin/game_list.html', context)
+
 
 def add_game(request):
     if request.method == 'POST':
@@ -511,6 +517,7 @@ def del_game(request, game_id):
 
 def edit_game(request, game_id):
     game = get_object_or_404(Game, nid=game_id)  # 获取要编辑的游戏
+    game.update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     questions = Questions.objects.filter(game=game)  # 获取与游戏相关的问题
 
     if request.method == 'POST':
@@ -573,7 +580,8 @@ def generate_QandA(request, game_id):
     qas_list = resp["choices"][0]["message"]["content"]
     # qas_list = "[" + ai_res + "]"
     print(qas_list)
-    print('------------------------------------------------------------------------------------------------------------------------------------------------------------')
+    print(
+        '------------------------------------------------------------------------------------------------------------------------------------------------------------')
     qas_list = json.loads(qas_list)  # 返回一个 JSON 响应
     print(type(qas_list), qas_list)
     if qas_list:
@@ -604,14 +612,14 @@ def generate_whathow(request, game_id):
     if game_info:
         game = Game.objects.get(nid=game_id)
         print(game_info)
-        game.whatis=game_info[0]["whatis"]
-        game.HowtoPlay=game_info[0]["howtoplay"]
+        game.whatis = game_info[0]["whatis"]
+        game.HowtoPlay = game_info[0]["howtoplay"]
         game.save()
     return redirect('/game_list')  # 替换为成功后的重定向URL
 
-#ajax调用AI
-def generate_whathow2(request):
 
+# ajax调用AI
+def generate_whathow2(request):
     if request.method == 'POST':
         try:
             # 获取传递的参数
@@ -645,8 +653,8 @@ def generate_whathow2(request):
     else:
         return JsonResponse({'error': 'Invalid method'}, status=405)
 
-def generate_description(request):
 
+def generate_description(request):
     if request.method == 'POST':
         try:
             # 获取传递的参数
@@ -666,9 +674,9 @@ def generate_description(request):
                 resp = interact_with_openai(prompts)
                 resp = json.loads(resp)
                 ai_res = resp["choices"][0]["message"]["content"]
-                game_info = "["+ai_res+"]"
-                print(type(ai_res),ai_res)
-                game_info = json.loads(game_info)# 返回一个 JSON 响应
+                game_info = "[" + ai_res + "]"
+                print(type(ai_res), ai_res)
+                game_info = json.loads(game_info)  # 返回一个 JSON 响应
                 print(type(game_info), game_info)
                 return JsonResponse(game_info[0])
 
@@ -678,10 +686,14 @@ def generate_description(request):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Invalid method'}, status=405)
-#ajax调用AI
+
+
+# ajax调用AI
 
 import git
 from datetime import datetime
+
+
 def pushByGit(request):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(now)
@@ -699,11 +711,11 @@ def pushByGit(request):
         # 添加所有更改（包括新文件和删除的文件）
         repo.git.add(A=True)  # 等同于 `git add .`
         # 提交更改
-        commit_message = now+"使用python脚本更新"
+        commit_message = now + "使用python脚本更新"
         repo.index.commit(commit_message)
         # 推送更改到远程仓库
         repo.git.push("origin", "main")  # 或 "main"
-        responsetext=f"""
+        responsetext = f"""
         下列文件已推送到远程仓库：
         🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀\n
         {list}
@@ -712,3 +724,28 @@ def pushByGit(request):
 
     else:
         return HttpResponse("✅ 没有需要提交的更改")
+
+
+def generate_sitemap(request):
+    # 获取动态内容（如数据库中的文章）
+    games = Game.objects.filter(is_checked=True)
+    site = siteinfo()
+    # 获取静态页面 URL（如首页、关于页）
+    static_urls = [
+        reverse('aboutus'),
+        reverse('copyright'),
+    ]
+
+    # 生成 XML 内容
+    context = {
+        'site': site,
+        'games': games,
+        'static_urls': static_urls,
+        'current_date': timezone.now().date().isoformat(),
+    }
+    xml_content = render_to_string('sitemap.xml', context)  # 渲染模板
+    file_path = os.path.join(settings.BASE_DIR, f'sitemap.xml')  # 静态文件路径
+
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(xml_content)  # 写入 HTML 内容
+    return HttpResponse(f"sitemap.xml已生成")

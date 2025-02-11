@@ -59,6 +59,10 @@ urlpatterns = [
     path("generate_aboutus/", views.aboutus_html, name="aboutus_html"),
     # 生成About结束
 
+    # 生成sitemap开始
+    path("generate_sitemap/", views.generate_sitemap, name="generate_sitemap"),
+    # 生成sitemap结束
+
     # <footer路由
     path('about-us/', views.aboutus, name='aboutus'),
     path('copyright/', views.copyright, name='copyright'),
@@ -69,6 +73,7 @@ urlpatterns = [
     path("push/", views.pushByGit, name="pushByGit"),
     # 其他路由
     path('ckeditor/', include('ckeditor_uploader.urls')),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
