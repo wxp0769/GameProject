@@ -9,9 +9,13 @@
     <meta http-equiv="audience" content="General">
     <meta name="theme-color" content="#ffeee1">
     <meta name="resource-type" content="Game"/>
-    <title>{% if index == 1 or index == 3 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}</title>
-    <meta name="title" content="{% if index == 1 or index == 3 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}">
-    <meta name="description" content="{% if index == 1 %}{{ site.description }}{% elif index == 2 %}{{ game_obj.description }}{% else %}{{ about_title }}{% endif %}">
+    <title>{% if index == 1 or index == 3 %}{{ site.site_name }} -
+        {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}
+        {{ about_title }}{% endif %}</title>
+    <meta name="title" content="{% if index == 1 or index == 3 %}{{ site.site_name }} -
+        {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% else %}{{ about_title }}{% endif %}">
+    <meta name="description" content="
+            {% if index == 1 %}{{ site.description }}{% elif index == 2 %}{{ game_obj.description }}{% else %}{{ about_title }}{% endif %}">
     <link rel="icon" href="./static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./static/css/all_way.css">
     <link rel="canonical" href="{{ site.site_url }}/{{ game_obj.slug }}.html">
@@ -22,7 +26,8 @@
         {
           "@context": "https://schema.org",
           "@type": "Game",
-          "name": "{% if index == 1 or index == 3 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }}{% else %}{{ about_title }}{% endif %}",
+          "name": "{% if index == 1 or index == 3 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}
+        {{ game_obj.title }}{% else %}{{ about_title }}{% endif %}",
           "image": "{{ site.site_url }}/media/{{ game_obj.thumbnail }}",
           "description": "{{ game_obj.description }}",
           "genre": ["Racing", "Driving","Drifting"],
@@ -55,16 +60,16 @@
                 </div>
                 <div class="menu-header">
                     <div class="h-full d-r-flex">
-                    <a class="d-flex al header-item" href="https://www.cargames-unblocked.com/game_list_1.html">Car Games Unblocked</a>
+                        <a class="d-flex al header-item" href="https://www.cargames-unblocked.com/game_list_1.html">Car
+                            Games Unblocked</a>
                         {% for item in top_menus %}
                             <a class="d-flex al header-item"
                                href="{{ item.slug }}.html">{{ item.title }}</a>
                         {% endfor %}
                     </div>
                 </div>
-                {#                <div class="p-r search-box">#}
-                {#                    <div id="list-suggest" class="link-suggest"></div>#}
-                {#                </div>#}
+                <script async src="https://cse.google.com/cse.js?cx=61689eacb4371439b"></script>
+                <div class="gcse-search"></div>{#<div class="p-r search-box"><div id="list-suggest" class="link-suggest"></div></div>#}
             </div>
         </div>
     </div>
@@ -102,15 +107,19 @@
     <script src="/static/js/jquery-3.4.1.min.js"></script>
     <script src="/static/js/jquery.validate.min.js"></script>
     <script src="/static/js/footer.js"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HEZ08L1WWL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HEZ08L1WWL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-HEZ08L1WWL');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-HEZ08L1WWL');
+    </script>
 </div>
 </body>
 </html>
