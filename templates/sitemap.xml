@@ -22,7 +22,7 @@
     {% endfor %}
     {% for game in games %}
     <url>
-        <loc>{{ site.site_url }}/{{ game.slug }}</loc>
+        <loc>{{ site.site_url }}/{{ game.slug }}.html</loc>
         <lastmod>{{ game.update_time|date:"Y-m-d" }}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
