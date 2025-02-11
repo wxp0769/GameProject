@@ -424,7 +424,9 @@ input, button {
     -ms-flex-direction: column;
     flex-direction: column
 }
-
+.gsc-input {
+    width: 150px; /* 设置宽度 */
+}
 .sp {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
