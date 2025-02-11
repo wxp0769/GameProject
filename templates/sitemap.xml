@@ -10,14 +10,20 @@
         <loc>https://www.cargames-unblocked.com/game_list_1.html</loc>
         <lastmod>{{ current_date }}</lastmod>
         <changefreq>daily</changefreq>
-        <priority>1.0</priority>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://www.cargames-unblocked.com/game_list_2.html</loc>
+        <lastmod>{{ current_date }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
     {% for url in static_urls %}
     <url>
-        <loc>{{ site.site_url }}{{ url }}</loc>
+        <loc>{{ site.site_url }}{{ url }}.html</loc>
         <lastmod>{{ current_date }}</lastmod>
         <changefreq>daily</changefreq>
-        <priority>1.0</priority>
+        <priority>0.7</priority>
     </url>
     {% endfor %}
     {% for game in games %}
