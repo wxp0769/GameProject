@@ -428,7 +428,7 @@ input, button {
 .sp {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: flex-start
+    justify-content: space-between
 }
 
 .bz {
