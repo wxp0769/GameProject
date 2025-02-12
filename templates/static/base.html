@@ -9,17 +9,11 @@
     <meta http-equiv="audience" content="General">
     <meta name="theme-color" content="#ffeee1">
     <meta name="resource-type" content="Game"/>
-    <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}
-        {% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}
-    {% elif index == 3 %}Unblocked Car Games 🚗 Play 100+ Free Online Racing Games - CarGames-Unblocked
-    {% else %}{{ about_title }}{% endif %}</title>
+    <title>{% if index == 1 %}{{ site.site_name }} - {{ site.title }}{% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% elif index == 3 %}Unblocked Car Games 🚗 Play 100+ Free Online Racing Games - CarGames-Unblocked{% else %}{{ about_title }}{% endif %}</title>
     <meta name="title" content="{% if index == 1 %}{{ site.site_name }} - {{ site.title }}
-    {% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}
-    {% elif index == 3 %}Unblocked Car Games 🚗 Play 100+ Free Online Racing Games - CarGames-Unblocked{% else %}{{ about_title }}{% endif %}">
+    {% elif index == 2 %}{{ game_obj.title }} - {{ site.title }}{% elif index == 3 %}Unblocked Car Games 🚗 Play 100+ Free Online Racing Games - CarGames-Unblocked{% else %}{{ about_title }}{% endif %}">
     <meta name="description" content=" {% if index == 1 %}{{ site.description }}
-    {% elif index == 2 %}{{ game_obj.description }}
-    {% elif index == 3 %}Enjoy HTML5 car racing games without downloads! 100+ unblocked games including drift challenges, F1 simulations & multiplayer races. School-friendly & Chromebook compatible. New games added daily!
-    {% else %}{{ about_title }}{% endif %}">
+    {% elif index == 2 %}{{ game_obj.description }}{% elif index == 3 %}Enjoy HTML5 car racing games without downloads! 100+ unblocked games including drift challenges, F1 simulations & multiplayer races. School-friendly & Chromebook compatible. New games added daily!{% else %}{{ about_title }}{% endif %}">
     <link rel="icon" href="./static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./static/css/all_way.css">
     <link rel="canonical" href="{{ site.site_url }}/{{ game_obj.slug }}.html">
