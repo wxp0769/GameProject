@@ -36,7 +36,7 @@ def get_recommend_games():
 
 
 def new_games():
-    game_list = models.Game.objects.all().filter(is_checked=1, recommend=0).order_by('-create_time')[:12]
+    game_list = models.Game.objects.all().filter(is_checked=1, recommend=0).order_by('-create_time')[:18]
     return game_list
 
 
