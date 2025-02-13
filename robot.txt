@@ -5,4 +5,4 @@ Disallow: /manage.py
 Disallow: /.idea
 Disallow: /*.bat
 Allow: /
-Sitemap: https://cargames-unblocked.com/sitemap.xml
+Sitemap: https://www.cargames-unblocked.com/sitemap.xml

@@ -67,8 +67,8 @@ class Game(models.Model):
 
 class Questions(models.Model):
     nid = models.AutoField(primary_key=True)
-    question = models.CharField(verbose_name='游戏问题', max_length=200, blank=True)
-    answer = models.CharField(verbose_name='问题答案', max_length=200, blank=True)
+    question = models.CharField(verbose_name='游戏问题', max_length=512, blank=True)
+    answer = models.CharField(verbose_name='问题答案', max_length=512, blank=True)
     game = models.ForeignKey(verbose_name='所属游戏', to='Game', to_field='nid', on_delete=models.CASCADE, null=True,
                              blank=True)
 
