@@ -525,7 +525,7 @@ def edit_game(request, game_id):
 
         if game_form.is_valid():
             game_form.save()  # 保存游戏数据
-
+            generate_game_html(request, game_id)# 生成html
             # 更新问题
             for question in questions:
                 question_text = request.POST.get(f'question_{question.nid}')
