@@ -726,7 +726,8 @@ def pushByGit(request):
         return render(request, 'admin/push.html', context)
 
     else:
-        return HttpResponse("✅ 没有需要提交的更改")
+        return render(request, 'admin/push.html', {"responsetext":"✅ 没有需要提交的更改"})
+
 
 
 def generate_sitemap(request):
