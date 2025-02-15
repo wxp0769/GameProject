@@ -717,7 +717,6 @@ def pushByGit(request):
         repo.git.push("origin", "main")  # 或 "main"
         responsetext = f"""
         下列文件已推送到远程仓库：
-        🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
         """
         context={
             "list":list,
