@@ -717,10 +717,13 @@ def pushByGit(request):
         repo.git.push("origin", "main")  # 或 "main"
         responsetext = f"""
         下列文件已推送到远程仓库：
-        🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀\n
-        {list}
+        🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
         """
-        return HttpResponse(responsetext)
+        context={
+            "list":list,
+            "responsetext":responsetext
+        }
+        return render(request, 'admin/push.html', context)
 
     else:
         return HttpResponse("✅ 没有需要提交的更改")
