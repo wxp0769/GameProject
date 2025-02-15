@@ -206,7 +206,7 @@ def generate_allgame_html(request):
 
 
 def gameList(request):
-    game_list = models.Game.objects.all().filter(is_checked=1).order_by('-create_time')
+    game_list = models.Game.objects.all().filter(is_checked=1).order_by('-update_time')
     page_object = Pagination(request, game_list, page_size=48)
     site = siteinfo()
     top_menus = menus()
@@ -476,7 +476,7 @@ def game_list(request):  # 未审核的游戏
 
 
 def game_list_checked(request):  # 已审核的游戏
-    game_list = models.Game.objects.filter(is_checked=True).order_by('-nid')
+    game_list = models.Game.objects.filter(is_checked=True).order_by('-update_time')
     page_object = Pagination(request, game_list, page_size=15)
     context = {
         "game_list": page_object.page_queryset,  # 分完页的数据
