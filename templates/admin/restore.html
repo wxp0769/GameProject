@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>数据库恢复</title>
+</head>
+<body>
+    <h1>选择备份文件恢复数据库</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="backup_file">选择备份文件：</label>
+        <select name="backup_file" id="backup_file">
+            {% for file in backup_files %}
+            <option value="{{ file }}">{{ file }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">恢复</button>
+    </form>
+</body>
+</html>

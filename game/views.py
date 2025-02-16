@@ -1,7 +1,7 @@
 import json
 import os
 import re
-
+from .utils.backup_restore import backup_database, restore_database
 from django.core.paginator import Paginator
 from django.forms import inlineformset_factory, modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
@@ -756,3 +756,21 @@ def generate_sitemap(request):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(xml_content)  # 写入 HTML 内容
     return HttpResponse(f"sitemap.xml已生成")
+
+
+def backup_view(request):
+    """ 触发数据库备份 """
+    result = backup_database()
+    return JsonResponse({"message": result})
+
+def restore_view(request):
+    """ 触发数据库恢复 """
+    if request.method == "POST":
+        backup_file = request.POST.get("backup_file")
+        result = restore_database(backup_file)
+        return JsonResponse({"message": result})
+
+    # 获取所有备份文件列表
+    backup_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "backup")
+    backup_files = [f for f in os.listdir(backup_dir) if f.endswith(".sql")]
+    return render(request, "restore.html", {"backup_files": backup_files})
