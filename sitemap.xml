@@ -2,33 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.cargames-unblocked.com</loc>
-        <lastmod>2025-02-15</lastmod>
+        <lastmod>2025-02-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.cargames-unblocked.com/game_list_1.html</loc>
-        <lastmod>2025-02-15</lastmod>
+        <lastmod>2025-02-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://www.cargames-unblocked.com/game_list_2.html</loc>
-        <lastmod>2025-02-15</lastmod>
+        <lastmod>2025-02-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
         <loc>https://www.cargames-unblocked.com/about-us/.html</loc>
-        <lastmod>2025-02-15</lastmod>
+        <lastmod>2025-02-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
         <loc>https://www.cargames-unblocked.com/copyright/.html</loc>
-        <lastmod>2025-02-15</lastmod>
+        <lastmod>2025-02-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
@@ -562,6 +562,69 @@
     <url>
         <loc>https://www.cargames-unblocked.com/crazy-drift.html</loc>
         <lastmod>2025-02-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/scar.html</loc>
+        <lastmod>2025-02-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/derby-crash.html</loc>
+        <lastmod>2025-02-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/stickman-annihilation-2.html</loc>
+        <lastmod>2025-02-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/gangster-crimes-online-6-mafia-city.html</loc>
+        <lastmod>2025-02-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/car-crash-simulator-royale.html</loc>
+        <lastmod>2025-02-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/obstacle-race-destroying-simulator.html</loc>
+        <lastmod>2025-02-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/monster-truck-demolition-derby.html</loc>
+        <lastmod>2025-02-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/merge-battle-car.html</loc>
+        <lastmod>2025-02-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/cry-islands.html</loc>
+        <lastmod>2025-02-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
