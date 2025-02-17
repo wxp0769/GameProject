@@ -23,11 +23,12 @@ def backup_database():
 
     # 执行 mysqldump 备份数据库
     command = f"mysql -h {db_host} -P {db_port} -u {db_user} -p {db_password} {db_name} > {backup_file}"
+    print(os.system(command))
 
-    if os.system(command) == 0:
-        return f"Backup successful: {backup_file}"
+    if os.system(command) == 1:
+        return f"数据库备份成功: {backup_file}"
     else:
-        return "Backup failed"
+        return "数据库备份失败"
 
 
 def restore_database(backup_file):
@@ -49,7 +50,7 @@ def restore_database(backup_file):
     # 执行 mysql 进行数据库恢复
     command = f"mysql -h {db_host} -P {db_port} -u {db_user} -p'{db_password}' {db_name} < {backup_path}"
 
-    if os.system(command) == 0:
-        return f"Restore successful from: {backup_file}"
+    if os.system(command) == 1:
+        return f"数据库恢复成功: {backup_file}"
     else:
-        return "Restore failed"
+        return "数据库恢复失败"

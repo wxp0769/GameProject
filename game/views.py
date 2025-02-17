@@ -494,7 +494,6 @@ def add_game(request):
     if request.method == 'POST':
         game_form = GameModelForm(request.POST, request.FILES)
         question_form = QuestionsModelForm(request.POST)
-
         if game_form.is_valid() and question_form.is_valid():
             # 保存游戏
             game = game_form.save()
@@ -761,16 +760,16 @@ def generate_sitemap(request):
 def backup_view(request):
     """ 触发数据库备份 """
     result = backup_database()
-    return JsonResponse({"message": result})
+    return HttpResponse(result)
 
 def restore_view(request):
     """ 触发数据库恢复 """
     if request.method == "POST":
         backup_file = request.POST.get("backup_file")
         result = restore_database(backup_file)
-        return JsonResponse({"message": result})
+        return HttpResponse(result)
 
     # 获取所有备份文件列表
-    backup_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "backup")
+    backup_dir = os.path.join(settings.BASE_DIR, 'backup')
     backup_files = [f for f in os.listdir(backup_dir) if f.endswith(".sql")]
-    return render(request, "restore.html", {"backup_files": backup_files})
+    return render(request, "admin/restore.html", {"backup_files": backup_files})
