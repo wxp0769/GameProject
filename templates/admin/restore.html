@@ -9,7 +9,7 @@
         {% csrf_token %}
         <label for="backup_file">选择备份文件：</label>
         <select name="backup_file" id="backup_file">
-            {% for file in backup_files %}
+            {% for file in backup_files reversed %}
             <option value="{{ file }}">{{ file }}</option>
             {% endfor %}
         </select>

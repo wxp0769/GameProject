@@ -2,33 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.cargames-unblocked.com</loc>
-        <lastmod>2025-02-17</lastmod>
+        <lastmod>2025-02-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.cargames-unblocked.com/game_list_1.html</loc>
-        <lastmod>2025-02-17</lastmod>
+        <lastmod>2025-02-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://www.cargames-unblocked.com/game_list_2.html</loc>
-        <lastmod>2025-02-17</lastmod>
+        <lastmod>2025-02-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
         <loc>https://www.cargames-unblocked.com/about-us/.html</loc>
-        <lastmod>2025-02-17</lastmod>
+        <lastmod>2025-02-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
         <loc>https://www.cargames-unblocked.com/copyright/.html</loc>
-        <lastmod>2025-02-17</lastmod>
+        <lastmod>2025-02-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
@@ -660,6 +660,27 @@
     <url>
         <loc>https://www.cargames-unblocked.com/motor-wars-2.html</loc>
         <lastmod>2025-02-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/crazy-car-stunts.html</loc>
+        <lastmod>2025-02-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/truck-driving-simulator-game.html</loc>
+        <lastmod>2025-02-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.cargames-unblocked.com/endless-hot-pursuit.html</loc>
+        <lastmod>2025-02-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
