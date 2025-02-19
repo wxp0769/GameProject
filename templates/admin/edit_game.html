@@ -168,6 +168,13 @@
                 window.open("https://www.google.com/search?q=" + encodeURIComponent(gamename), "_blank");
 
             });
+            $('#iframeUrl').click(function (e) {
+                // 替换成你要打开的网址
+                e.preventDefault();
+                let iframeUrl = $('#id_iframeUrl').val();
+                window.open(iframeUrl, "_blank");
+
+            });
         });
     </script>
 </div>
