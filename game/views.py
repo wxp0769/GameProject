@@ -773,3 +773,19 @@ def restore_view(request):
     backup_dir = os.path.join(settings.BASE_DIR, 'backup')
     backup_files = [f for f in os.listdir(backup_dir) if f.endswith(".sql")]
     return render(request, "admin/restore.html", {"backup_files": backup_files})
+
+def delete_backup(request):
+    """ 触发数据库备份 """
+    file_name = request.GET.get("backup_file")
+
+    if file_name:
+        backup_dir = os.path.join(settings.BASE_DIR, "backup")
+        file_path = os.path.join(backup_dir, file_name)
+
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            return redirect('/restore')  # 重定向到其他页面
+        else:
+            return HttpResponse("文件不存在", status=404)
+    else:
+        return HttpResponse("无效的请求", status=400)

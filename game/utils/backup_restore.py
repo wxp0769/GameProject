@@ -43,7 +43,7 @@ def restore_database(backup_file):
     backup_path = os.path.join(BACKUP_DIR, backup_file)
 
     if not os.path.exists(backup_path):
-        return "Backup file not found"
+        return "备份文件不存在"
 
     # 执行 mysql 进行数据库恢复
     command = f"mysql -h {db_host} -P {db_port} -u {db_user} -p{db_password} {db_name} < {backup_path}"
