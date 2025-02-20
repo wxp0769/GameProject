@@ -731,21 +731,6 @@ def pushByGit(request):
     else:
         return render(request, 'admin/push.html', {"responsetext":"✅ 没有需要提交的更改"})
 
-def git_pull(request):
-    # repo_path = os.getcwd()  # 获取当前工作目录
-    # print(repo_path)
-    # repo = Repo(repo_path)
-    repo = Repo(".")
-    print(repo.remotes.origin.url)
-    # 放弃本地修改（如果需要）
-    repo.git.reset('--hard')
-    repo.git.clean('-fd')
-    origin = repo.remote(name='origin')
-    origin.pull()
-    result="Git pull 完成"
-    print(result)
-    return HttpResponse(result)
-
 def generate_sitemap(request):
     # 获取动态内容（如数据库中的文章）
     games = Game.objects.filter(is_checked=True)
