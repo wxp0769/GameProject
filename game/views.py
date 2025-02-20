@@ -732,9 +732,11 @@ def pushByGit(request):
         return render(request, 'admin/push.html', {"responsetext":"✅ 没有需要提交的更改"})
 
 def git_pull(request):
-    repo_path = os.getcwd()  # 获取当前工作目录
-    print(repo_path)
-    repo = Repo(repo_path)
+    # repo_path = os.getcwd()  # 获取当前工作目录
+    # print(repo_path)
+    # repo = Repo(repo_path)
+    repo = Repo(".")
+    print(repo.remotes.origin.url)
     origin = repo.remote(name='origin')
     origin.pull()
     result="Git pull 完成"
