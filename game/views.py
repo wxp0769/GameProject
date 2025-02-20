@@ -789,8 +789,9 @@ def delete_backup(request):
     else:
         return HttpResponse("无效的请求", status=400)
 
-def savepic(myurl):
+def savepic(request):
     from game.utils.crazypic import get_pic
-    pic = get_pic(myurl)
-    print(pic)
-    return JsonResponse('OK')
+    if request.method == "POST":
+        myurl=request.POST.get("iframeValue")
+        get_pic(myurl)
+        return JsonResponse({"status": "success", "message": "处理成功"})

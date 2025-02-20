@@ -147,10 +147,44 @@
                     // 成功回调：处理返回的 JSON 数据
                     if (response) {
                         console.log(response);
-                        $("label[for='id_description']").css("color", "green");
+                        $("#id_description").css("color", "green");
                         $('#id_description').val(response.description); // 将返回的 'description' 字段值赋给 id_description 输入框
                     } else {
                         console.log('Response does not contain the expected "id_description" field');
+                    }
+                },
+                error: function (error) {
+                    // 错误回调：请求失败时执行
+                    console.log('Request failed: ', error);
+                }
+            });
+
+
+        });
+        $('#savepic').on('click', function (event) {
+            event.preventDefault(); // 防止按钮默认提交行为
+            const iframeValue = $('#id_iframeUrl').val(); // 获取输入框的值
+            // 获取 CSRF Token
+            const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+            $.ajax({
+
+                url: '/savepic/',
+                type: 'POST',  // 请求方法
+                data: {
+                    iframeValue: iframeValue,
+                    csrfmiddlewaretoken: csrfToken,
+                },
+                dataType: 'json',
+                success: function (response) {
+                    // 成功回调：处理返回的 JSON 数据
+                    if (response) {
+                        if (response["status"] === "success") {
+                            $('#id_iframeUrl').css("color", "green"); // 将返回的 'description' 字段值赋给 id_description 输入框
+                        }
+
+
+                    } else {
+                        console.log('Response does not contain the expected "id_iframeUrl" field');
                     }
                 },
                 error: function (error) {

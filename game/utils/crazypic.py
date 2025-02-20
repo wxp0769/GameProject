@@ -4,6 +4,7 @@ import requests
 import re
 import json
 def get_pic(picurl):
+    print(picurl)
 
     # 发送请求获取网页内容
     headers = {
