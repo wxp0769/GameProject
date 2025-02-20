@@ -14,6 +14,24 @@ def get_pic(picurl):
     # 目标存储路径
     save_dir = r"D:\Downloads\pic"
     os.makedirs(save_dir, exist_ok=True)  # 创建目录（如果不存在）
+    import shutil
+    # 确保目标目录存在
+    if os.path.exists(save_dir):
+        # 遍历目标目录中的所有文件和文件夹
+        for item in os.listdir(save_dir):
+            item_path = os.path.join(save_dir, item)
+            try:
+                if os.path.isdir(item_path):
+                    shutil.rmtree(item_path)  # 删除文件夹及其中的内容
+                    print(f'{item_path} 文件夹已删除')
+                elif os.path.isfile(item_path):
+                    os.remove(item_path)  # 删除文件
+                    print(f'{item_path} 文件已删除')
+            except Exception as e:
+                print(f'删除 {item_path} 失败: {e}')
+    else:
+        print(f'目录 {save_dir} 不存在')
+    
     # 检查请求是否成功
     if response.status_code == 200:
         page_content = response.text
