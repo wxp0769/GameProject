@@ -737,6 +737,9 @@ def git_pull(request):
     # repo = Repo(repo_path)
     repo = Repo(".")
     print(repo.remotes.origin.url)
+    # 放弃本地修改（如果需要）
+    repo.git.reset('--hard')
+    repo.git.clean('-fd')
     origin = repo.remote(name='origin')
     origin.pull()
     result="Git pull 完成"
