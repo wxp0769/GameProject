@@ -38,6 +38,7 @@ urlpatterns = [
     path('delete/<int:game_id>', views.del_game, name='del_game'),
     path('addgame/', views.add_game, name='add_game'),
     path('editgame/<int:game_id>', views.edit_game, name='edit_game'),
+    path('savepic/', views.savepic, name='savepic'),
     # >表单页面路由结束
 
     # <静态页路由开始

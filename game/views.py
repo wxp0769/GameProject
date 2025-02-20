@@ -789,3 +789,9 @@ def delete_backup(request):
             return HttpResponse("文件不存在", status=404)
     else:
         return HttpResponse("无效的请求", status=400)
+
+def savepic(myurl):
+    from game.utils.crazypic import get_pic
+    pic = get_pic(myurl)
+    print(pic)
+    return JsonResponse('OK')
