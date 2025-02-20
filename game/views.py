@@ -695,6 +695,7 @@ def generate_description(request):
 
 import git
 from datetime import datetime
+from git import Repo
 
 
 def pushByGit(request):
@@ -730,7 +731,14 @@ def pushByGit(request):
     else:
         return render(request, 'admin/push.html', {"responsetext":"✅ 没有需要提交的更改"})
 
-
+def git_pull(request):
+    repo_path = "."
+    repo = Repo(repo_path)
+    origin = repo.remotes.origin
+    origin.pull()
+    result="Git pull 完成"
+    print(result)
+    return HttpResponse(result)
 
 def generate_sitemap(request):
     # 获取动态内容（如数据库中的文章）

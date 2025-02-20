@@ -72,6 +72,7 @@ urlpatterns = [
     path('term-of-use/', views.termofuse, name='termofuse'),
     # footer路由>
     path("push/", views.pushByGit, name="pushByGit"),
+    path("pull/", views.git_pull, name="git_pull"),
     # 其他路由
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
