@@ -55,10 +55,10 @@
         </thead>
         <tbody>
         {% for game in game_list %}
-            <tr>
+            <tr class="game-item"  data-item-id="{{ game.nid }}">
                 <td>{{ game.nid }}</td>
                 <td>
-                    <input type="checkbox" name="is_checked" value="1" {% if game.is_checked %}checked{% endif %}>
+                    <input type="checkbox" name="is_checked" value="1"  id="id_is_checked_{{ game.id }}" data-item-id="{{ game.nid }}" {% if game.is_checked %}checked{% endif %}>
                 </td>
                 <td>{{ game.title }}</td>
                 <td><img src="/media/{{ game.thumbnail }}" width="50px" height="50px"></td>
@@ -93,5 +93,55 @@
         {{ page_string }}
     </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("input[name='is_checked']").forEach(checkbox => {
+        checkbox.addEventListener("change", function () {
+            const itemId = this.dataset.itemId;  // 获取数据 ID
+            const isChecked = this.checked;  // 是否选中
+            const gameItem = document.querySelector(`.game-item[data-item-id="${itemId}"]`); // 获取父级元素
+
+            fetch(`/update_status/${itemId}/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken"),  // 获取 CSRF 令牌
+                },
+                body: JSON.stringify({ is_checked: isChecked }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    {#alert(isChecked ? "已发布" : "已取消发布");#}
+
+                    if (isChecked && gameItem) {
+                        gameItem.remove();  // 移除本行
+                    }
+                } else {
+                    alert("操作失败");
+                    checkbox.checked = !isChecked;  // 失败时恢复原状态
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
+
+    // 获取 CSRF 令牌的函数
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script>
 </body>
 </html>

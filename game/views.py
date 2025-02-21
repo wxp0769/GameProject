@@ -1,6 +1,9 @@
 import json
 import os
 import re
+
+from django.views.decorators.csrf import csrf_exempt
+
 from .utils.backup_restore import backup_database, restore_database
 from django.core.paginator import Paginator
 from django.forms import inlineformset_factory, modelformset_factory
@@ -795,3 +798,21 @@ def savepic(request):
         myurl=request.POST.get("iframeValue")
         get_pic(myurl)
         return JsonResponse({"status": "success", "message": "处理成功"})
+
+@csrf_exempt
+def update_status(request, item_id):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            is_checked = data.get("is_checked", False)  # 获取前端传来的状态
+            game = Game.objects.get(nid=item_id)
+            game.is_checked = is_checked  # 更新状态
+            game.save()
+
+            return JsonResponse({"success": True})
+        except Game.DoesNotExist:
+            return JsonResponse({"success": False, "error": "游戏不存在"}, status=404)
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)}, status=500)
+
+    return JsonResponse({"success": False, "error": "无效请求"}, status=400)

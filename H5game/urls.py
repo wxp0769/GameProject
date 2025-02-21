@@ -78,6 +78,7 @@ urlpatterns = [
     path('backup/', views.backup_view, name='backup'),
     path('restore/', views.restore_view, name='restore'),
     path('delete_backup/', views.delete_backup, name='delete_backup'),
+    path("update_status/<int:item_id>/", views.update_status, name="update_status"),
 
 ]
 if settings.DEBUG:
