@@ -39,6 +39,7 @@
 <body>
 <div class="container">
     <h1 class="mt-4">游戏列表</h1><a href="/game_list_ok/">已审核{{ qty_ok }}</a>&nbsp;&nbsp;<a href="/game_list/">未审核{{ qty }}</a>
+    <input type="text" id="search" placeholder="搜索游戏">
     <table class="table table-striped" style="border: 1px solid #dee2e6;">
         <thead>
         <tr>
@@ -80,7 +81,7 @@
                     {% if game.whatis %}
                         <a href="/generate_whathow/{{ game.nid }}" class="btn-success">✅已生成</a>
                     {% else %}
-                        <a href="/generate_whathow/{{ game.nid }}" class="btn-primary">❌未生成</a>
+                        <a href="/generate_whathow/{{ game.nid }}" class="btn-primary">❌未生成stt</a>
                     {% endif %}
                 </td>
                 <td>
