@@ -474,7 +474,7 @@ def game_list(request):  # 管理未审核的游戏
         game_list = Game.objects.filter(title__icontains=query)  # 模糊搜索
         page_object = Pagination(request, game_list, page_size=15)
     else:
-        game_list = Game.objects.all()  # 显示所有游戏
+        game_list = Game.objects.filter(is_checked=False).order_by('-update_time')  # 显示所有游戏
         page_object = Pagination(request, game_list, page_size=15)
     qty = Game.objects.filter(is_checked=False).count()  # 未审核数量
     qty_ok = Game.objects.filter(is_checked=True).count()  # 已审核数量
