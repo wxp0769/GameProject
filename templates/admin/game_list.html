@@ -91,10 +91,10 @@
             <th>缩略图</th>
             <th>推荐等级</th>
             <th>操作</th>
-            <th>AI生成QA</th>
-            <th>AI生成WH</th>
-            <th>静态化</th>
-            <th>更新</th>
+            <th>问题答案</th>
+            <th>游戏介绍</th>
+            <th>生成HTML</th>
+            <th>更新日期</th>
         </tr>
         </thead>
         <tbody>
@@ -124,11 +124,11 @@
                     {% if game.whatis %}
                         <a href="/generate_whathow/{{ game.nid }}" class="btn-success">✅已生成</a>
                     {% else %}
-                        <a href="/generate_whathow/{{ game.nid }}" class="btn-primary">❌未生成stt</a>
+                        <a href="/generate_whathow/{{ game.nid }}" class="btn-primary">❌未生成</a>
                     {% endif %}
                 </td>
                 <td>
-                    <a href="/generate_game/{{ game.nid }}" class="btn-success">生成Html</a>
+                    <a href="/generate_game/{{ game.nid }}" class="btn-info">生成Html</a>
                 </td>
                 <td>{{ game.update_time|date:"Y-m-d" }}</td>
             </tr>
