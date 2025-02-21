@@ -34,12 +34,54 @@
             background-color: #000;
             color: #fff
         }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between; /* 在水平方向上分配空间 */
+            align-items: center; /* 垂直居中 */
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center; /* 垂直居中对齐 "已审核"、"未审核" 和搜索框 */
+            margin-left: auto; /* 将右侧内容推到最右 */
+            margin-right: 50px;
+        }
+
+        .search-form {
+            margin-left: 20px; /* 搜索框和链接之间的间距 */
+        }
+
+        .search-form input {
+            padding: 5px;
+            margin-right: 5px; /* 搜索框和按钮之间的间距 */
+        }
+
     </style>
 </head>
 <body>
 <div class="container">
-    <h1 class="mt-4">游戏列表</h1><a href="/game_list_ok/">已审核{{ qty_ok }}</a>&nbsp;&nbsp;<a href="/game_list/">未审核{{ qty }}</a>
-    <input type="text" id="search" placeholder="搜索游戏">
+    {#    <h1 class="mt-4">游戏列表</h1><a href="/game_list_ok/">已审核{{ qty_ok }}</a>&nbsp;&nbsp;<a href="/game_list/">未审核{{ qty }}</a>#}
+    {#    <!-- 搜索表单 -->#}
+    {#    <form method="GET" action="{% url 'game_list' %}">#}
+    {#        <input type="text" name="query" placeholder="搜索游戏" value="{{ query }}">#}
+    {#        <button type="submit">搜索</button>#}
+    {#    </form>#}
+
+    <div class="header-container">
+        <h1 class="mt-4">游戏列表</h1>
+        <div class="header-right">
+            <a href="/game_list_ok/">已审核{{ qty_ok }}</a>&nbsp;&nbsp;
+            <a href="/game_list/">未审核{{ qty }}</a>
+            <!-- 搜索表单 -->
+            <form method="GET" action="{% url 'game_list' %}" class="search-form">
+                <input type="text" name="query" placeholder="搜索游戏" value="{{ query }}">
+                <button type="submit">搜索</button>
+            </form>
+        </div>
+    </div>
+
+
     <table class="table table-striped" style="border: 1px solid #dee2e6;">
         <thead>
         <tr>
@@ -57,10 +99,11 @@
         </thead>
         <tbody>
         {% for game in game_list %}
-            <tr class="game-item"  data-item-id="{{ game.nid }}">
+            <tr class="game-item" data-item-id="{{ game.nid }}">
                 <td>{{ game.nid }}</td>
                 <td>
-                    <input type="checkbox" name="is_checked" value="1"  id="id_is_checked_{{ game.nid }}" data-item-id="{{ game.nid }}" {% if game.is_checked %}checked{% endif %}>
+                    <input type="checkbox" name="is_checked" value="1" id="id_is_checked_{{ game.nid }}"
+                           data-item-id="{{ game.nid }}" {% if game.is_checked %}checked{% endif %}>
                 </td>
                 <td>{{ game.title }}</td>
                 <td><img src="/media/{{ game.thumbnail }}" width="50px" height="50px"></td>
@@ -89,6 +132,10 @@
                 </td>
                 <td>{{ game.update_time|date:"Y-m-d" }}</td>
             </tr>
+        {% empty %}
+            <tr>
+                <td colspan="10">未找到符合搜索条件的游戏</td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
@@ -97,53 +144,53 @@
     </div>
 </div>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("input[name='is_checked']").forEach(checkbox => {
-        checkbox.addEventListener("change", function () {
-            const itemId = this.dataset.itemId;  // 获取数据 ID
-            const isChecked = this.checked;  // 是否选中
-            const gameItem = document.querySelector(`.game-item[data-item-id="${itemId}"]`); // 获取父级元素
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("input[name='is_checked']").forEach(checkbox => {
+            checkbox.addEventListener("change", function () {
+                const itemId = this.dataset.itemId;  // 获取数据 ID
+                const isChecked = this.checked;  // 是否选中
+                const gameItem = document.querySelector(`.game-item[data-item-id="${itemId}"]`); // 获取父级元素
 
-            fetch(`/update_status/${itemId}/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken"),  // 获取 CSRF 令牌
-                },
-                body: JSON.stringify({ is_checked: isChecked }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    {#alert(isChecked ? "已发布" : "已取消发布");#}
-                    if (isChecked && gameItem) {
-                        gameItem.remove();  // 移除本行
-                    }
-                } else {
-                    alert("操作失败");
-                    checkbox.checked = !isChecked;  // 失败时恢复原状态
-                }
-            })
-            .catch(error => console.error("Error:", error));
+                fetch(`/update_status/${itemId}/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": getCookie("csrftoken"),  // 获取 CSRF 令牌
+                    },
+                    body: JSON.stringify({is_checked: isChecked}),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            {#alert(isChecked ? "已发布" : "已取消发布");#}
+                            if (isChecked && gameItem) {
+                                gameItem.remove();  // 移除本行
+                            }
+                        } else {
+                            alert("操作失败");
+                            checkbox.checked = !isChecked;  // 失败时恢复原状态
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+            });
         });
-    });
 
-    // 获取 CSRF 令牌的函数
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== "") {
-            const cookies = document.cookie.split(";");
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.startsWith(name + "=")) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
+        // 获取 CSRF 令牌的函数
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith(name + "=")) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
                 }
             }
+            return cookieValue;
         }
-        return cookieValue;
-    }
-});
+    });
 </script>
 </body>
 </html>

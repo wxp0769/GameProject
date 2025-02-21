@@ -468,17 +468,25 @@ def edit_Site(request):
 
 
 def game_list(request):  # 管理未审核的游戏
-    game_list = models.Game.objects.filter(is_checked=False)
-    page_object = Pagination(request, game_list, page_size=15)
-    qty=len(game_list)
+    """按标题搜索游戏（模糊匹配）"""
+    query = request.GET.get("query", "").strip()  # 获取搜索关键字
+    if query:
+        game_list = Game.objects.filter(title__icontains=query)  # 模糊搜索
+        page_object = Pagination(request, game_list, page_size=15)
+    else:
+        game_list = Game.objects.all()  # 显示所有游戏
+        page_object = Pagination(request, game_list, page_size=15)
+    qty = Game.objects.filter(is_checked=False).count()  # 未审核数量
+    qty_ok = Game.objects.filter(is_checked=True).count()  # 已审核数量
     context = {
         "game_list": page_object.page_queryset,  # 分完页的数据
         'page_string': page_object.html(),  # 页码
-        'qty': qty, # 页码未审核的游戏数量
+        "query": query,  # 让搜索框回显
+        "qty": qty,
+        "qty_ok": qty_ok
     }
 
     return render(request, 'admin/game_list.html', context)
-
 
 def game_list_checked(request):  # 管理已审核的游戏
     game_list = models.Game.objects.filter(is_checked=True).order_by('-update_time')
@@ -531,7 +539,7 @@ def edit_game(request, game_id):
 
         if game_form.is_valid():
             game_form.save()  # 保存游戏数据
-            generate_game_html(request, game_id)# 生成html
+            generate_game_html(request, game_id)  # 生成html
             # 更新问题
             for question in questions:
                 question_text = request.POST.get(f'question_{question.nid}')
@@ -725,14 +733,15 @@ def pushByGit(request):
         responsetext = f"""
         下列文件已推送到远程仓库：
         """
-        context={
-            "list":list,
-            "responsetext":responsetext
+        context = {
+            "list": list,
+            "responsetext": responsetext
         }
         return render(request, 'admin/push.html', context)
 
     else:
-        return render(request, 'admin/push.html', {"responsetext":"✅ 没有需要提交的更改"})
+        return render(request, 'admin/push.html', {"responsetext": "✅ 没有需要提交的更改"})
+
 
 def generate_sitemap(request):
     # 获取动态内容（如数据库中的文章）
@@ -764,6 +773,7 @@ def backup_view(request):
     result = backup_database()
     return HttpResponse(result)
 
+
 def restore_view(request):
     """ 触发数据库恢复 """
     if request.method == "POST":
@@ -775,6 +785,7 @@ def restore_view(request):
     backup_dir = os.path.join(settings.BASE_DIR, 'backup')
     backup_files = [f for f in os.listdir(backup_dir) if f.endswith(".sql")]
     return render(request, "admin/restore.html", {"backup_files": backup_files})
+
 
 def delete_backup(request):
     """ 触发数据库备份 """
@@ -792,12 +803,14 @@ def delete_backup(request):
     else:
         return HttpResponse("无效的请求", status=400)
 
+
 def savepic(request):
     from game.utils.crazypic import get_pic
     if request.method == "POST":
-        myurl=request.POST.get("iframeValue")
+        myurl = request.POST.get("iframeValue")
         get_pic(myurl)
         return JsonResponse({"status": "success", "message": "处理成功"})
+
 
 @csrf_exempt
 def update_status(request, item_id):
@@ -816,3 +829,6 @@ def update_status(request, item_id):
             return JsonResponse({"success": False, "error": str(e)}, status=500)
 
     return JsonResponse({"success": False, "error": "无效请求"}, status=400)
+
+
+
