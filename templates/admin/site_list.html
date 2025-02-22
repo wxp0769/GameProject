@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>站点管理列表</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 123, 255, 0.05);
+        }
+        .action-links a {
+            text-decoration: none;
+            margin: 0 8px;
+            transition: opacity 0.3s;
+        }
+        .action-links a:hover {
+            opacity: 0.7;
+        }
+        @media (max-width: 768px) {
+            .table-responsive {
+                border: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">站点管理列表</h4>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" style="width: 80px;">#</th>
+                                <th scope="col">站点名称</th>
+                                <th scope="col">域名</th>
+                                <th scope="col">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 示例数据 -->
+                            {% for site in sites %}
+                            <tr>
+                                <td>{{ site.nid }}</td>
+                                <td>{{ site.site_name }}</td>
+                                <td>{{ site.site_url }}</td>
+                                <td class="action-links">
+                                    <a href="{{ site.site_url }}" class="text-primary" title="访问">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        访问
+                                    </a>
+                                    <span class="text-secondary">|</span>
+                                    <a href="/editsite/{{ site.nid }}" class="text-success" title="编辑">
+                                        <i class="fas fa-edit"></i>
+                                        编辑
+                                    </a>
+                                    <span class="text-secondary">|</span>
+                                    <a href="#" class="text-danger" title="删除">
+                                        <i class="fas fa-trash-alt"></i>
+                                        删除
+                                    </a>
+                                    <span class="text-secondary">|</span>
+                                    <a href="#" class="text-danger" title="一键部署">
+                                        <i class="fas fa-trash-alt"></i>
+                                        一键部署
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS 和依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -453,14 +453,17 @@ def create_Site(request):
 
     return render(request, 'admin/edit_site.html', {'form': form})
 
+def site_list(request):
+    sites = models.Site.objects.all()
+    return render(request, 'admin/site_list.html', {'sites': sites})
 
-def edit_Site(request):
-    site = models.Site.objects.first()
+def edit_Site(request,site_id):
+    site = models.Site.objects.filter(nid=site_id).first()
     if request.method == 'POST':
         form = SiteModelForm(request.POST, request.FILES, instance=site)
         if form.is_valid():
             form.save()  # 保存数据到数据库
-            return redirect('/editsite')  # 重定向到当前页面
+            return redirect('/site_list')  # 重定向到当前页面
     else:
         form = SiteModelForm(instance=site)  # 将站点信息加载到表单
 
