@@ -425,9 +425,7 @@ from git import Repo
 
 def pushByGit(request):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(now)
     project_path = os.getcwd()  # 获取当前工作目录
-    print(project_path)
     # 获取当前仓库
     repo = git.Repo(project_path)
     # 检查是否有未提交的更改
