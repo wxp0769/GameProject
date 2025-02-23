@@ -6,12 +6,18 @@ from django.utils.text import slugify
 
 # Create your models here.
 def get_file_path(instance, filename):
-    # 获取站点域名，并去掉特殊字符，确保路径合法
-    site_folder = instance.site_url.replace("https://", "").replace("http://", "").replace("www.", "")
+    # 确保 instance 关联了 site
+    if hasattr(instance, 'site') and instance.site:
+        # 获取站点域名，并去掉特殊字符，确保路径合法
+        site_folder = instance.site.site_url.replace("https://", "").replace("http://", "").replace("www.", "")
+    else:
+        site_folder = "default_site"  # 处理没有 site 的情况，避免错误
     # 将原始文件名分割为文件名和扩展名
     ext = filename.split('.')[-1]
     # 生成新的文件名，这里使用UUID确保唯一性
     filename = f"{uuid4()}.{ext}"
+    if not filename:
+        return os.path.join(site_folder, 'static/uploads', 'logo.png')  # 直接存入 static 目录
     # 返回文件的保存路径，这里假设我们将文件保存在'uploads/'目录下
     return os.path.join(site_folder, 'uploads/', filename)
 
@@ -20,7 +26,7 @@ class Site(models.Model):
     nid = models.AutoField(primary_key=True)
     site_url = models.CharField(verbose_name='站点域名', max_length=64)
     site_name = models.CharField(verbose_name='站点名称', max_length=128)
-    logo = models.ImageField(upload_to=get_file_path,default="/uploads/logo.png")
+    logo = models.ImageField(upload_to=get_file_path, blank=True, null=True)
     title = models.CharField(verbose_name='SEO标题', max_length=128)
     description = models.CharField(verbose_name='站点描述', max_length=512)
     aboutus = RichTextUploadingField(verbose_name='关于我们', blank=True, null=True)
@@ -28,9 +34,10 @@ class Site(models.Model):
     contactus = RichTextUploadingField(verbose_name='contact us', blank=True, null=True)
     Privacypolicy = RichTextUploadingField(verbose_name='Privacy policy', blank=True, null=True)
     Termofuse = RichTextUploadingField(verbose_name='Term of use', blank=True, null=True)
-    games = models.ManyToManyField('Game', related_name='sites', blank=True, verbose_name='关联游戏')  # 多对多关系
     def __str__(self):
-        return self.title
+        domain=self.site_url.replace("https://", "").replace("http://", "").replace("www.", "").replace("/", "")
+        site_info='['+str(self.nid)+'] '+domain
+        return site_info
 
 
 class Game(models.Model):
@@ -47,7 +54,7 @@ class Game(models.Model):
     description = models.CharField(verbose_name='游戏描述', max_length=1024)
     # iframePageTitle = models.CharField(verbose_name='iframeTitle', max_length=50)
     # iframeDescription = models.CharField(verbose_name='iframeDescription', max_length=255)
-    thumbnail = models.FileField(verbose_name='游戏图片', upload_to=get_file_path, default="/uploads/logo.png")
+    thumbnail = models.FileField(verbose_name='游戏图片', upload_to=get_file_path)
     # GamePageUrl = models.CharField(verbose_name='GamePageUrl', max_length=50)
     iframeUrl = models.CharField(verbose_name='IFRAME', max_length=512)
     recommend = models.IntegerField(choices=RECOMMEND_CHOICES, default=0, verbose_name='推荐等级')  # 默认0，1为左边，2为右边，3为首页主游戏
@@ -58,6 +65,7 @@ class Game(models.Model):
     HowtoPlay = RichTextUploadingField(blank=True, null=True)
     source=models.CharField(verbose_name='游戏来源', max_length=128,default="")
     is_checked = models.BooleanField(verbose_name='是否发布', default=False)
+    site = models.ForeignKey('Site', on_delete=models.CASCADE, verbose_name='所属站点', related_name='games', null=True,blank=True)
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)

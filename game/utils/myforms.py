@@ -23,7 +23,7 @@ class SiteModelForm(forms.ModelForm):
 class GameModelForm(forms.ModelForm):
     class Meta:
         model = Game
-        fields = ['title', 'slug', 'description', 'thumbnail', 'description', 'iframeUrl', 'recommend', 'is_checked',
+        fields = ['title', 'slug', 'description', 'thumbnail', 'description', 'iframeUrl', 'recommend', 'site','is_checked',
                   'whatis', 'HowtoPlay']
         widgets = {
             'title': forms.TextInput(
@@ -34,8 +34,8 @@ class GameModelForm(forms.ModelForm):
             'thumbnail': forms.ClearableFileInput(attrs={'style': 'display:none;'}),  # 隐藏thumbnail输入框
             'iframeUrl': forms.TextInput(
                 attrs={'class': 'form-control', 'style': 'margin: 25px;width: 500px; display: inline-block;'}),
-            'recommend': forms.Select(attrs={'class': 'form-control', 'style': 'margin: 20px;width: 500px; display: inline-block;'}),
-            # 'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'recommend': forms.Select(attrs={'class': 'form-control', 'style': 'margin: 20px;width: 250px; display: inline-block;'}),
+            'site': forms.Select(attrs={'class': 'form-control', 'style': 'margin: 20px;width: 250px; display: inline-block;'}),
             'whatis': forms.Textarea(attrs={'class': 'form-control'}),
             'HowtoPlay': forms.Textarea(attrs={'class': 'form-control'}),
         }
