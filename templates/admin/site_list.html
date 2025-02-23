@@ -47,10 +47,18 @@
                         <tbody>
                             <!-- 示例数据 -->
                             {% for site in sites %}
-                            <tr>
-                                <td>{{ site.nid }}</td>
-                                <td>{{ site.site_name }}</td>
-                                <td>{{ site.site_url }}</td>
+                                <td>
+  <a href="{{ site.site_url }}" style="display: block; text-decoration: none; color: inherit">
+    <div style="display: flex; gap: 2px"> <!-- 使用Flex模拟原有布局 -->
+      <span style="width: 5rem;text-align: center">{{ site.nid }}</span> <!-- 用span代替td -->
+      <span style="width: 15rem;">{{ site.site_name }}</span>
+      <span style="width: 20rem;">{{ site.site_url }}</span>
+    </div>
+  </a>
+</td>
+{#                                <td>{{ site.nid }}</td>#}
+{#                                <td>{{ site.site_name }}</td>#}
+{#                                <td>{{ site.site_url }}</td>#}
                                 <td class="action-links">
                                     <a href="{{ site.site_url }}" class="text-primary" title="访问">
                                         <i class="fas fa-external-link-alt"></i>
