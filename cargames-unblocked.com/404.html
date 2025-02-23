@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Games Unblocked • 404</title>
+    <style>
+        :root {
+            --neon: #0ff;
+            --bg: #0a0a0f;
+            --text: rgba(255,255,255,0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Inter', system-ui, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 15, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .pulse {
+            font-size: 8rem;
+            background: linear-gradient(45deg, var(--neon), #7f0fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+
+        .home-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .home-btn:hover::before {
+            left: 100%;
+        }
+
+        /* 进度条动画 */
+        .home-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            background: var(--neon);
+            width: calc(100% * var(--progress, 1));
+            transition: width 1s linear;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .pulse { font-size: 5rem; }
+            h1 { font-size: 1.8rem; }
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="particles"></canvas>
+    
+    <div class="container">
+        <div class="pulse">404</div>
+        <h1>Lost in the Void</h1>
+        <p>The page you're looking for has drifted into the digital abyss.<br> 
+        Let's get you back to safety.</p>
+        <a href="/" class="home-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Return Home</span>
+        </a>
+    </div>
+
+    <script>
+        // 动态粒子背景
+        const canvas = document.querySelector('.particles');
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.velX = (Math.random() - 0.5) * 0.2;
+                this.velY = (Math.random() - 0.5) * 0.2;
+                this.size = Math.random() * 2;
+                this.alpha = Math.random() * 0.5;
+            }
+            
+            update() {
+                this.x += this.velX;
+                this.y += this.velY;
+                
+                if (this.x < 0 || this.x > canvas.width || 
+                    this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            
+            draw() {
+                ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particles = Array.from({ length: 100 }, () => new Particle());
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+        animate();
+
+        // 倒计时功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const homeBtn = document.querySelector('.home-btn');
+            const btnText = homeBtn.querySelector('span');
+            let countdown = 5;
+            let timer;
+
+            function updateTimer() {
+                btnText.textContent = `Return Home (${countdown}秒)`;
+                homeBtn.style.setProperty('--progress', countdown/5);
+                
+                if(countdown <= 0) {
+                    clearInterval(timer);
+                    window.location.href = '/';
+                }
+                countdown--;
+            }
+
+            timer = setInterval(updateTimer, 1000);
+
+            homeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearInterval(timer);
+                window.location.href = '/';
+            });
+
+            updateTimer();
+        });
+    </script>
+</body>
+</html>

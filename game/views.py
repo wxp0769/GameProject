@@ -125,7 +125,9 @@ def generate_index_html(request):  # 生成静态html文件
     html_play = render_to_string("static/play.html", context_play).replace("/media/", "./../media/")
 
     # 生成首页静态文件路径
-    index_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    # index_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    print(site.site_url)
+    index_output_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://","").replace("http://","").replace("www.",""))
     if not os.path.exists(index_output_dir):
         os.makedirs(index_output_dir)  # 如果目录不存在，则创建
     index_file_path = os.path.join(index_output_dir, f"index.html")
@@ -178,7 +180,8 @@ def generate_game_html(request, game_id):  # 生成静态html文件
     html_play = render_to_string("static/play.html", context_play).replace("/media/", "./../media/")
 
     # 生成静态文件路径
-    game_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    # game_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    game_output_dir = os.path.join(settings.BASE_DIR,site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""))  # 存储静态文件的目录，设置为空表示生成在根目录
     if not os.path.exists(game_output_dir):
         os.makedirs(game_output_dir)  # 如果目录不存在，则创建
     output_file_path = os.path.join(game_output_dir, f"{game_obj.slug}.html")
@@ -229,7 +232,8 @@ def gameList_html(request):  # 分类页html
     paginator = Paginator(games, 30)  # 每页 10 条数据
     site = siteinfo()
     top_menus = menus()
-    static_dir = os.path.join(settings.BASE_DIR, '')  # 定义存储目录
+    # static_dir = os.path.join(settings.BASE_DIR, '')  # 定义存储目录
+    static_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""))  # 定义存储目录
     os.makedirs(static_dir, exist_ok=True)  # 确保目录存在
 
     for page_number in range(1, paginator.num_pages + 1):
@@ -286,7 +290,7 @@ def aboutus_html(request):
     }
     html_code = render_to_string("static/aboutus.html", context)
     # 生成静态文件路径
-    game_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    game_output_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""))  # 存储静态文件的目录，设置为空表示生成在根目录
     if not os.path.exists(game_output_dir):
         os.makedirs(game_output_dir)  # 如果目录不存在，则创建
     output_file_path = os.path.join(game_output_dir, f"about-us.html")
@@ -321,10 +325,10 @@ def copyright_html(request):
     }
     html_code = render_to_string("static/aboutus.html", context)
     # 生成静态文件路径
-    game_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    game_output_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""))  # 存储静态文件的目录，设置为空表示生成在根目录
     if not os.path.exists(game_output_dir):
         os.makedirs(game_output_dir)  # 如果目录不存在，则创建
-    output_file_path = os.path.join(game_output_dir, f"copyright.html")
+    output_file_path = os.path.join(game_output_dir,f"copyright.html")
     with open(output_file_path, "w", encoding="utf-8") as f:
         f.write(html_code)
         f.close()
@@ -356,7 +360,7 @@ def contactus_html(request):
     }
     html_code = render_to_string("static/aboutus.html", context)
     # 生成静态文件路径
-    game_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    game_output_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""))  # 存储静态文件的目录，设置为空表示生成在根目录
     if not os.path.exists(game_output_dir):
         os.makedirs(game_output_dir)  # 如果目录不存在，则创建
     output_file_path = os.path.join(game_output_dir, f"contact-us.html")
@@ -391,7 +395,7 @@ def privacypolicy_html(request):
     }
     html_code = render_to_string("static/aboutus.html", context)
     # 生成静态文件路径
-    game_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    game_output_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""))  # 存储静态文件的目录，设置为空表示生成在根目录
     if not os.path.exists(game_output_dir):
         os.makedirs(game_output_dir)  # 如果目录不存在，则创建
     output_file_path = os.path.join(game_output_dir, f"privacy-policy.html")
@@ -427,7 +431,7 @@ def termofuse_html(request):
     }
     html_code = render_to_string("static/aboutus.html", context)
     # 生成静态文件路径
-    game_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
+    game_output_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""))  # 存储静态文件的目录，设置为空表示生成在根目录
     if not os.path.exists(game_output_dir):
         os.makedirs(game_output_dir)  # 如果目录不存在，则创建
     output_file_path = os.path.join(game_output_dir, f"term-of-use.html")
@@ -766,7 +770,8 @@ def generate_sitemap(request):
         'current_date': timezone.now().date().isoformat(),
     }
     xml_content = render_to_string('sitemap.xml', context)  # 渲染模板
-    file_path = os.path.join(settings.BASE_DIR, f'sitemap.xml')  # 静态文件路径
+    file_path = os.path.join(settings.BASE_DIR, site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""),f'sitemap.xml')  # 静态文件路径
+    print(file_path)
 
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(xml_content)  # 写入 HTML 内容

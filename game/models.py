@@ -6,19 +6,21 @@ from django.utils.text import slugify
 
 # Create your models here.
 def get_file_path(instance, filename):
+    # 获取站点域名，并去掉特殊字符，确保路径合法
+    site_folder = instance.site_url.replace("https://", "").replace("http://", "").replace("www.", "")
     # 将原始文件名分割为文件名和扩展名
     ext = filename.split('.')[-1]
     # 生成新的文件名，这里使用UUID确保唯一性
     filename = f"{uuid4()}.{ext}"
     # 返回文件的保存路径，这里假设我们将文件保存在'uploads/'目录下
-    return os.path.join('uploads/', filename)
+    return os.path.join(site_folder, 'uploads/', filename)
 
 
 class Site(models.Model):
     nid = models.AutoField(primary_key=True)
     site_url = models.CharField(verbose_name='站点域名', max_length=64)
     site_name = models.CharField(verbose_name='站点名称', max_length=128)
-    logo = models.ImageField(upload_to=get_file_path)
+    logo = models.ImageField(upload_to=get_file_path,default="/uploads/logo.png")
     title = models.CharField(verbose_name='SEO标题', max_length=128)
     description = models.CharField(verbose_name='站点描述', max_length=512)
     aboutus = RichTextUploadingField(verbose_name='关于我们', blank=True, null=True)
