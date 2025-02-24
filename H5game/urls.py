@@ -30,7 +30,7 @@ urlpatterns = [
     path('games/', views.gameList, name='gameList'),
 
     # <表单页面路由开始
-    path('guanli/', views.guanli, name='guanli'),
+    path('site_manage/<int:site_id>', views.site_manage, name='site_manage'),
     path('createsite/', views.create_Site, name='create_Site'),
     path('site_list/', views.site_list, name='site_list'),
     path('editsite/<int:site_id>', views.edit_Site, name='edit_Site'),

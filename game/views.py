@@ -150,7 +150,11 @@ def termofuse(request):
     return render(request, "aboutus.html", context)
 
 def guanli(request):
-    return render(request, 'admin/site_admin.html')
+    return render(request, 'admin/admin.html')
+
+def site_manage(request,site_id):
+    return render(request, 'admin/site_manage.html')
+
 
 def create_Site(request):
     if request.method == 'POST':
