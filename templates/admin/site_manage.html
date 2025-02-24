@@ -6,9 +6,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>管理页面</title>
     <style>
-        .collapse {
-            margin-left: 15px;
+        a {
+        color: #fff;
         }
+        h1 a{
+        text-decoration: none!important;
+        }
+
     </style>
 </head>
 <body>
@@ -17,7 +21,7 @@
         <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
             <div class="sidebar-sticky">
                 <header class="bg-dark text-light text-center py-3">
-                    <h1>后台管理</h1><a href="/push/" target="contentFrame">更新站点 </a>
+                    <h1><a href="/htgl">站点管理</a></h1>
                 </header>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -37,6 +41,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/generate_allpage_html" target="contentFrame">生成全站html</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/push/" target="contentFrame">部署站点</a>
                     </li>
                 </ul>
             </div>
