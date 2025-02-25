@@ -36,8 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game',
-    'ckeditor',
-    'ckeditor_uploader',  # 如果需要文件上传功能
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -130,20 +129,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 X_FRAME_OPTIONS = 'ALLOWALL'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"  # 上传文件的路径
-# 可选：CKEditor 配置
-CKEDITOR_CONFIGS = {
+DJANGO_CKEDITOR_5_CONFIGS = {
     'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': 'auto',
-        'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-            ['NumberedList', 'BulletedList'],
-            ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source']
+        "block_types": ["paragraph", "heading", "blockQuote"],
+        "toolbar": [
+            "bold", "italic", "link", "underline", "strikeThrough",
+            "heading", "blockQuote", "codeBlock", "bulletedList", "numberedList",
+            "horizontalLine", "insertTable", "undo", "redo"
         ],
-        'extraPlugins': ','.join(['image2']),  # 确保启用了图片上传插件
-    },
+    }
 }
 
 # 生成的静态 HTML 文件存储路径

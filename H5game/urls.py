@@ -74,7 +74,6 @@ urlpatterns = [
     # footer路由>
     path("push/", views.pushByGit, name="pushByGit"),
     # 其他路由
-    path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('backup/', views.backup_view, name='backup'),
     path('restore/', views.restore_view, name='restore'),

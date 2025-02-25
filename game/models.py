@@ -1,6 +1,6 @@
 import os
 from uuid import uuid4
-from ckeditor_uploader.fields import RichTextUploadingField
+from django_ckeditor_5.fields import CKEditor5Field
 from django.db import models
 from django.utils.text import slugify
 
@@ -29,11 +29,11 @@ class Site(models.Model):
     logo = models.ImageField(upload_to=get_file_path, blank=True, null=True)
     title = models.CharField(verbose_name='SEO标题', max_length=128)
     description = models.CharField(verbose_name='站点描述', max_length=512)
-    aboutus = RichTextUploadingField(verbose_name='关于我们', blank=True, null=True)
-    copyright = RichTextUploadingField(verbose_name='copyright', blank=True, null=True)
-    contactus = RichTextUploadingField(verbose_name='contact us', blank=True, null=True)
-    Privacypolicy = RichTextUploadingField(verbose_name='Privacy policy', blank=True, null=True)
-    Termofuse = RichTextUploadingField(verbose_name='Term of use', blank=True, null=True)
+    aboutus = CKEditor5Field(verbose_name='关于我们', blank=True, null=True)
+    copyright = CKEditor5Field(verbose_name='copyright', blank=True, null=True)
+    contactus = CKEditor5Field(verbose_name='contact us', blank=True, null=True)
+    Privacypolicy = CKEditor5Field(verbose_name='Privacy policy', blank=True, null=True)
+    Termofuse = CKEditor5Field(verbose_name='Term of use', blank=True, null=True)
     def __str__(self):
         domain=self.site_url.replace("https://", "").replace("http://", "").replace("www.", "").replace("/", "")
         site_info='['+str(self.nid)+'] '+domain
@@ -60,9 +60,9 @@ class Game(models.Model):
     recommend = models.IntegerField(choices=RECOMMEND_CHOICES, default=0, verbose_name='推荐等级')  # 默认0，1为左边，2为右边，3为首页主游戏
     create_time = models.DateTimeField(verbose_name='create_time', auto_now_add=True)
     update_time = models.DateTimeField(verbose_name='update_time', auto_now_add=True)
-    content = RichTextUploadingField(blank=True, null=True)
-    whatis = RichTextUploadingField(blank=True, null=True)
-    HowtoPlay = RichTextUploadingField(blank=True, null=True)
+    content = CKEditor5Field(blank=True, null=True)
+    whatis = CKEditor5Field(blank=True, null=True)
+    HowtoPlay = CKEditor5Field(blank=True, null=True)
     source=models.CharField(verbose_name='游戏来源', max_length=128,default="")
     is_checked = models.BooleanField(verbose_name='是否发布', default=False)
     site = models.ForeignKey('Site', on_delete=models.CASCADE, verbose_name='所属站点', related_name='games', null=True,blank=True)
