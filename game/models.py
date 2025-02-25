@@ -33,7 +33,9 @@ class Site(models.Model):
     copyright = CKEditor5Field(verbose_name='copyright', blank=True, null=True)
     contactus = CKEditor5Field(verbose_name='contact us', blank=True, null=True)
     Privacypolicy = CKEditor5Field(verbose_name='Privacy policy', blank=True, null=True)
-    Termofuse = CKEditor5Field(verbose_name='Term of use', blank=True, null=True)
+    # Termofuse = CKEditor5Field(verbose_name='Term of use', blank=True, null=True)
+    Termofuse = CKEditor5Field('Term of use', config_name = 'default')
+
     def __str__(self):
         domain=self.site_url.replace("https://", "").replace("http://", "").replace("www.", "").replace("/", "")
         site_info='['+str(self.nid)+'] '+domain

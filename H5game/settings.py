@@ -128,17 +128,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 X_FRAME_OPTIONS = 'ALLOWALL'
 
-CKEDITOR_UPLOAD_PATH = "uploads/"  # 上传文件的路径
-DJANGO_CKEDITOR_5_CONFIGS = {
+CKEDITOR_5_CONFIGS = {
     'default': {
-        "block_types": ["paragraph", "heading", "blockQuote"],
-        "toolbar": [
-            "bold", "italic", "link", "underline", "strikeThrough",
-            "heading", "blockQuote", "codeBlock", "bulletedList", "numberedList",
-            "horizontalLine", "insertTable", "undo", "redo"
-        ],
+        'toolbar': {
+            'items': [
+                'heading', '|', 'bold', 'italic', 'fontSize', 'link',
+                'bulletedList', 'numberedList', 'blockQuote', '|',
+                'insertTable', 'mediaEmbed', 'undo', 'redo'
+            ]
+        },
+        'editorConfig': {
+            'fontSize': {
+                'options': [12, 14, 16, 18, 20, 24, 28, 32],  # 可选字体大小
+                'supportAllValues': True
+            }
+        }
     }
 }
+
 
 # 生成的静态 HTML 文件存储路径
 STATIC_GAMES_DIR = os.path.join(BASE_DIR, "static_games")

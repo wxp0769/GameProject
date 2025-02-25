@@ -1,5 +1,6 @@
 from django import forms
 from game.models import *
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 
 class SiteModelForm(forms.ModelForm):
@@ -12,11 +13,11 @@ class SiteModelForm(forms.ModelForm):
             'site_name': forms.TextInput(attrs={'class': 'form-control', 'style': 'width: 550px;'}),  # 增加宽度
             'title': forms.TextInput(attrs={'class': 'form-control', 'style': 'width: 550px;'}),  # 增加宽度
             'description': forms.Textarea(attrs={'class': 'form-control', 'style': 'width: 550px;'}),  # 增加宽度
-            'aboutus': forms.Textarea(attrs={'class': 'form-control'}),
-            'copyright': forms.Textarea(attrs={'class': 'form-control'}),
-            'contactus': forms.Textarea(attrs={'class': 'form-control'}),
-            'Privacypolicy': forms.Textarea(attrs={'class': 'form-control'}),
-            'Termofuse': forms.Textarea(attrs={'class': 'form-control'}),
+            'aboutus': CKEditor5Widget(),
+            'copyright': CKEditor5Widget(),
+            'contactus': CKEditor5Widget(),
+            'Privacypolicy': CKEditor5Widget(),
+            'Termofuse': CKEditor5Widget(),
         }
 
 
