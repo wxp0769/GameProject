@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.http import HttpResponse, JsonResponse
 from game.models import Game
+from game.utils.pic_copy import copy_media_files
 
 def siteinfo():
     site = models.Site.objects.first()
@@ -56,7 +57,8 @@ def generate_index_html(request):  # 生成静态html文件
         "game_obj_play": game_obj_play,
     }
     html_play = render_to_string("static/play.html", context_play).replace("/media/", "./../media/")
-
+    print(site.site_url)
+    copy_media_files()
     # 生成首页静态文件路径
     # index_output_dir = os.path.join(settings.BASE_DIR, "")  # 存储静态文件的目录，设置为空表示生成在根目录
     index_output_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://","").replace("http://","").replace("www.",""))
@@ -78,7 +80,7 @@ def generate_index_html(request):  # 生成静态html文件
         f.write(html_play)
         f.close()
     return HttpResponse(
-        f"静态 HTML 文件已生成：<a href='/index.html' target='_blank'>点击查看</a>")
+        f"首页静态 HTML 文件已生成：<a href='/index.html' target='_blank'>点击查看</a>")
 
 
 def generate_game_html(request, game_id):  # 生成静态html文件
@@ -132,7 +134,7 @@ def generate_game_html(request, game_id):  # 生成静态html文件
         f.write(html_play)
         f.close()
     return HttpResponse(
-        f"静态 HTML 文件已生成：<a href='/{game_obj.slug}.html' target='_blank'>点击查看</a>")
+        f"游戏页静态 HTML 文件已生成：<a href='/{game_obj.slug}.html' target='_blank'>点击查看</a>")
 
 
 def generate_allgame_html(request):
@@ -140,8 +142,7 @@ def generate_allgame_html(request):
     if all_games_obj:
         for game in all_games_obj:
             generate_game_html(request, game.nid)
-    return HttpResponse(f"静态 HTML 文件已生成")
-
+    return HttpResponse(f"全部游戏静态 HTML 文件已生成")
 
 def gameList_html(request):  # 分类页html
     """生成分页的静态 HTML 文件"""
@@ -167,7 +168,7 @@ def gameList_html(request):  # 分类页html
 
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(html_content)  # 写入 HTML 内容
-    return HttpResponse(f"静态页面已生成，共 {paginator.num_pages} 页")
+    return HttpResponse(f"列表页静态 HTML 文件已生成，共 {paginator.num_pages} 页")
 
 
 def aboutus_html(request):
@@ -190,7 +191,7 @@ def aboutus_html(request):
         f.write(html_code)
         f.close()
     return HttpResponse(
-        f"静态 HTML 文件已生成：<a href='/about-us.html' target='_blank'>点击查看</a>")
+        f"AboutUs静态 HTML 文件已生成：<a href='/about-us.html' target='_blank'>点击查看</a>")
 
 def copyright_html(request):
     site = siteinfo()
@@ -212,7 +213,7 @@ def copyright_html(request):
         f.write(html_code)
         f.close()
     return HttpResponse(
-        f"静态 HTML 文件已生成：<a href='./copyright.html' target='_blank'>点击查看</a>")
+        f"Copyright静态 HTML 文件已生成：<a href='./copyright.html' target='_blank'>点击查看</a>")
 
 
 def contactus_html(request):
@@ -235,7 +236,7 @@ def contactus_html(request):
         f.write(html_code)
         f.close()
     return HttpResponse(
-        f"静态 HTML 文件已生成：<a href='./copyright.html' target='_blank'>点击查看</a>")
+        f"Contact Us静态 HTML 文件已生成：<a href='./copyright.html' target='_blank'>点击查看</a>")
 
 
 def privacypolicy_html(request):
@@ -258,7 +259,7 @@ def privacypolicy_html(request):
         f.write(html_code)
         f.close()
     return HttpResponse(
-        f"静态 HTML 文件已生成：<a href='./privacypolicy.html' target='_blank'>点击查看</a>")
+        f"Privacy Policy静态 HTML 文件已生成：<a href='./privacypolicy.html' target='_blank'>点击查看</a>")
 
 
 def termofuse_html(request):
@@ -281,7 +282,7 @@ def termofuse_html(request):
         f.write(html_code)
         f.close()
     return HttpResponse(
-        f"静态 HTML 文件已生成：<a href='./termofuse.html' target='_blank'>点击查看</a>")
+        f"Term Of Use静态 HTML 文件已生成：<a href='./termofuse.html' target='_blank'>点击查看</a>")
 
 
 def generate_sitemap(request):
