@@ -64,6 +64,7 @@ class Game(models.Model):
     update_time = models.DateTimeField(verbose_name='update_time', auto_now_add=True)
     content = CKEditor5Field(blank=True, null=True)
     whatis = CKEditor5Field(blank=True, null=True)
+    # whatis = models.TextField(verbose_name='whatis', blank=True, null=True)
     HowtoPlay = CKEditor5Field(blank=True, null=True)
     source=models.CharField(verbose_name='游戏来源', max_length=128,default="")
     is_checked = models.BooleanField(verbose_name='是否发布', default=False)

@@ -37,8 +37,8 @@ class GameModelForm(forms.ModelForm):
                 attrs={'class': 'form-control', 'style': 'margin: 25px;width: 500px; display: inline-block;'}),
             'recommend': forms.Select(attrs={'class': 'form-control', 'style': 'margin: 20px;width: 250px; display: inline-block;'}),
             'site': forms.Select(attrs={'class': 'form-control', 'style': 'margin: 20px;width: 250px; display: inline-block;'}),
-            'whatis': forms.Textarea(attrs={'class': 'form-control'}),
-            'HowtoPlay': forms.Textarea(attrs={'class': 'form-control'}),
+            'whatis': forms.Textarea(attrs={'class': 'form-control','style': 'margin: 20px;width: 600px; display: inline-block;'}),
+            'HowtoPlay': forms.Textarea(attrs={'class': 'form-control','style': 'margin: 20px;width: 600px; display: inline-block;'}),
         }
 
     def __init__(self, *args, **kwargs):
