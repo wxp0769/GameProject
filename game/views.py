@@ -310,18 +310,14 @@ def generate_QandA(request, game_id):
     resp = interact_with_openai(prompts)
     resp = json.loads(resp)
     qas_list = resp["choices"][0]["message"]["content"]
-    # qas_list = "[" + ai_res + "]"
-    print(qas_list)
-    print(
-        '------------------------------------------------------------------------------------------------------------------------------------------------------------')
     qas_list = json.loads(qas_list)  # 返回一个 JSON 响应
-    print(type(qas_list), qas_list)
+    print(qas_list)
+    print('------------------------------------------------------------------------------------------------------------------------------------------------------------')
     if qas_list:
         Questions.objects.filter(game_id=game.nid).delete()
         for qa in qas_list:
             Questions.objects.create(game_id=game.nid, question=qa["question"], answer=qa["answer"])
     return redirect('/game_list')  # 替换为成功后的重定向URL
-
 
 def generate_whathow(request, game_id):
     game = Game.objects.get(nid=game_id)
