@@ -41,20 +41,22 @@
                 <table class="table table-hover mb-0">
                     <thead class="table-light">
                     <tr>
-                        <th scope="col" style="width: 80px;">#</th>
-                        <th scope="col">站点名称</th>
-                        <th scope="col">域名</th>
-                        <th scope="col">操作</th>
+                        <th scope="col">
+                            <div style="display: flex; gap: 2px">
+                                <span style="width: 5rem;text-align: center">#</span>
+                                <span style="width: 15rem;">站点名称</span>
+                                <span style="width: 20rem;">域名</span>
+                            </div>
+                        </th>
+                        <th scope="col" style="padding-left: 7rem;">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- 示例数据 -->
                     {% for site in sites %}
                         <td>
                             <a href="/site_manage/{{ site.nid }}" style="display: block; text-decoration: none; color: inherit" target="_parent">
-                                <div style="display: flex; gap: 2px"> <!-- 使用Flex模拟原有布局 -->
+                                <div style="display: flex; gap: 2px">
                                     <span style="width: 5rem;text-align: center">{{ site.nid }}</span>
-                                    <!-- 用span代替td -->
                                     <span style="width: 15rem;">{{ site.site_name }}</span>
                                     <span style="width: 20rem;">{{ site.site_url }}</span>
                                 </div>
@@ -74,11 +76,6 @@
                             <a href="#" class="text-danger" title="删除">
                                 <i class="fas fa-trash-alt"></i>
                                 删除
-                            </a>
-                            <span class="text-secondary">|</span>
-                            <a href="#" class="text-danger" title="一键部署">
-                                <i class="fas fa-trash-alt"></i>
-                                一键部署
                             </a>
                         </td>
                         </tr>
