@@ -26,7 +26,7 @@ def get_recommend_games():
 
 
 def new_games():
-    game_list = models.Game.objects.all().filter(is_checked=1, recommend=0).order_by('-create_time')[:18]
+    game_list = models.Game.objects.all().filter(is_checked=1, recommend=0).order_by('-update_time')[:18]
     return game_list
 def generate_index_html(request):  # 生成静态html文件
     # 获取游戏对象
@@ -138,15 +138,16 @@ def generate_game_html(request, game_id):  # 生成静态html文件
 
 
 def generate_allgame_html(request):
-    all_games_obj = Game.objects.all()
+    all_games_obj = Game.objects.filter(is_checked=1)
+    games_qty=len(all_games_obj)
     if all_games_obj:
         for game in all_games_obj:
             generate_game_html(request, game.nid)
-    return HttpResponse(f"全部游戏静态 HTML 文件已生成")
+    return HttpResponse(f"全部游戏(共{games_qty}个)静态 HTML 文件已生成")
 
 def gameList_html(request):  # 分类页html
     """生成分页的静态 HTML 文件"""
-    games = Game.objects.all().filter(is_checked=1).order_by('-create_time')  # 获取所有游戏并按创建时间降序排列
+    games = Game.objects.all().filter(is_checked=1).order_by('-update_time')  # 获取所有游戏并按创建时间降序排列
     paginator = Paginator(games, 30)  # 每页 10 条数据
     site = siteinfo()
     top_menus = menus()
@@ -308,3 +309,13 @@ def generate_sitemap(request):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(xml_content)  # 写入 HTML 内容
     return HttpResponse(f"sitemap.xml已生成")
+
+def generate_404_page(request):
+    site = siteinfo()
+    html_output_dir = os.path.join(settings.BASE_DIR,site.site_url.replace("https://", "").replace("http://", "").replace("www.",""))  # 存储静态文件的目录，设置为空表示生成在根目录
+    file_path = os.path.join(html_output_dir,f'404.html')  # 静态文件路径
+    html_content = render_to_string("static/404.html")
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)  # 写入 HTML 内容
+    return HttpResponse(f"404.html已生成")
+

@@ -88,6 +88,7 @@ def generate_allpage_html(request):
     privacypolicy_html(request)
     termofuse_html(request)
     generate_sitemap(request)
+    generate_404_page(request)
     return HttpResponse(f"全站静态 HTML 文件已生成")
 
 
