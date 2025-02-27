@@ -11,34 +11,34 @@ from django.http import HttpResponse, JsonResponse
 from game.models import Game
 from game.utils.pic_copy import copy_media_files
 
-def siteinfo():
-    site = models.Site.objects.first()
+def siteinfo(site_id):
+    site = models.Site.objects.filter(nid=site_id).first()
     return site
-def menus():
-    top_menus = models.Game.objects.filter(recommend=4, is_checked=1)[:8]
+def menus(site_id):
+    top_menus = models.Game.objects.filter(recommend=4, is_checked=1,site_id=site_id)[:8]
     return top_menus
 
 
-def get_recommend_games():
-    game_list_L = models.Game.objects.filter(recommend=1, is_checked=1)[:6]
-    game_list_R = models.Game.objects.filter(recommend=2, is_checked=1)[:6]
+def get_recommend_games(site_id):
+    game_list_L = models.Game.objects.filter(recommend=1, is_checked=1,site_id=site_id)[:6]
+    game_list_R = models.Game.objects.filter(recommend=2, is_checked=1,site_id=site_id)[:6]
     return game_list_L, game_list_R
 
 
-def new_games():
-    game_list = models.Game.objects.all().filter(is_checked=1, recommend=0).order_by('-update_time')[:18]
+def new_games(site_id):
+    game_list = models.Game.objects.all().filter(is_checked=1, recommend=0,site_id=site_id).order_by('-update_time')[:18]
     return game_list
-def generate_index_html(request):  # 生成静态html文件
+def generate_index_html(request,site_id):  # 生成静态html文件
     # 获取游戏对象
-    game_obj = models.Game.objects.filter(recommend=3, is_checked=1).first()
+    game_obj = models.Game.objects.filter(recommend=3, is_checked=1,site_id=site_id).first()
     if not game_obj:
         return HttpResponse("游戏不存在", status=404)
 
     # 额外数据
-    recommend_gamelist_L, recommend_gamelist_R = get_recommend_games()
-    newgames = new_games()
-    site = siteinfo()
-    top_menus = menus()
+    recommend_gamelist_L, recommend_gamelist_R = get_recommend_games(site_id)
+    newgames = new_games(site_id)
+    site = siteinfo(site_id)
+    top_menus = menus(site_id)
     QandA = models.Questions.objects.filter(game_id=game_obj.nid).order_by('-nid')[:8]
     # 渲染模板为字符串
     context = {
@@ -83,17 +83,17 @@ def generate_index_html(request):  # 生成静态html文件
         f"首页静态 HTML 文件已生成：<a href='/index.html' target='_blank'>点击查看</a>")
 
 
-def generate_game_html(request, game_id):  # 生成静态html文件
+def generate_game_html(request, game_id,site_id):  # 生成静态html文件
     # 获取游戏对象
-    game_obj = Game.objects.filter(nid=game_id, is_checked=1).first()
+    game_obj = Game.objects.filter(nid=game_id, is_checked=1,site_id=site_id).first()
     if not game_obj:
         return HttpResponse("游戏不存在", status=404)
 
     # 额外数据
-    recommend_gamelist_L, recommend_gamelist_R = get_recommend_games()
-    newgames = new_games()
-    site = siteinfo()
-    top_menus = menus()
+    recommend_gamelist_L, recommend_gamelist_R = get_recommend_games(site_id)
+    newgames = new_games(site_id)
+    site = siteinfo(site_id)
+    top_menus = menus(site_id)
     QandA = models.Questions.objects.filter(game_id=game_obj.nid).order_by('-nid')[:8]
     # 渲染模板为字符串
     context = {
@@ -137,21 +137,20 @@ def generate_game_html(request, game_id):  # 生成静态html文件
         f"游戏页静态 HTML 文件已生成：<a href='/{game_obj.slug}.html' target='_blank'>点击查看</a>")
 
 
-def generate_allgame_html(request):
-    all_games_obj = Game.objects.filter(is_checked=1)
+def generate_allgame_html(request,site_id):
+    all_games_obj = Game.objects.filter(is_checked=1,site_id=site_id)
     games_qty=len(all_games_obj)
     if all_games_obj:
         for game in all_games_obj:
-            generate_game_html(request, game.nid)
+            generate_game_html(request, game.nid,site_id)
     return HttpResponse(f"全部游戏(共{games_qty}个)静态 HTML 文件已生成")
 
-def gameList_html(request):  # 分类页html
+def gameList_html(request,site_id):  # 分类页html
     """生成分页的静态 HTML 文件"""
-    games = Game.objects.all().filter(is_checked=1).order_by('-update_time')  # 获取所有游戏并按创建时间降序排列
+    games = Game.objects.filter(is_checked=1,site_id=site_id).order_by('-update_time')  # 获取所有游戏并按创建时间降序排列
     paginator = Paginator(games, 30)  # 每页 10 条数据
-    site = siteinfo()
-    top_menus = menus()
-    # static_dir = os.path.join(settings.BASE_DIR, '')  # 定义存储目录
+    site = siteinfo(site_id)
+    top_menus = menus(site_id)
     static_dir = os.path.join(settings.BASE_DIR, site.site_url.replace("https://", "").replace("http://", "").replace("www.", ""))  # 定义存储目录
     os.makedirs(static_dir, exist_ok=True)  # 确保目录存在
 

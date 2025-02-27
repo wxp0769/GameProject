@@ -154,7 +154,8 @@ def guanli(request):
     return render(request, 'admin/admin.html')
 
 def site_manage(request,site_id):
-    return render(request, 'admin/site_manage.html')
+    site_id=site_id
+    return render(request, 'admin/site_manage.html',{"site_id":site_id})
 
 
 def create_Site(request):

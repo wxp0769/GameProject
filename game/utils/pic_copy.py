@@ -11,9 +11,10 @@ def copy_media_files():
     for filename in os.listdir(source_dir):
         source_path = os.path.join(source_dir, filename)
         dest_path = os.path.join(dest_dir, filename)
-        print(source_path, dest_path)
+        # print(source_path, dest_path)
         if os.path.isfile(source_path):
             if os.path.exists(dest_path) and filecmp.cmp(source_path, dest_path, shallow=False):
-                print(dest_path+'已存在')
+                # print(dest_path+'已存在')
+                pass
             else:
                 shutil.copy2(source_path, dest_path)
