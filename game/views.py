@@ -185,14 +185,14 @@ def edit_Site(request,site_id):
     return render(request, 'admin/edit_site.html', {'site': site, 'form': form})
 
 
-def game_list(request):  # 管理未审核的游戏
+def game_list(request,site_id):  # 管理未审核的游戏
     """按标题搜索游戏（模糊匹配）"""
     query = request.GET.get("query", "").strip()  # 获取搜索关键字
     if query:
-        game_list = Game.objects.filter(title__icontains=query)  # 模糊搜索
+        game_list = Game.objects.filter(title__icontains=query,site_id=site_id)  # 模糊搜索
         page_object = Pagination(request, game_list, page_size=15)
     else:
-        game_list = Game.objects.filter(is_checked=False).order_by('-update_time')  # 显示所有游戏
+        game_list = Game.objects.filter(is_checked=False,site_id=site_id).order_by('-update_time')  # 显示所有游戏
         page_object = Pagination(request, game_list, page_size=15)
     qty = Game.objects.filter(is_checked=False).count()  # 未审核数量
     qty_ok = Game.objects.filter(is_checked=True).count()  # 已审核数量
@@ -206,7 +206,7 @@ def game_list(request):  # 管理未审核的游戏
 
     return render(request, 'admin/game_list.html', context)
 
-def game_list_checked(request):  # 管理已审核的游戏
+def game_list_checked(request,site_id):  # 管理已审核的游戏
     game_list = models.Game.objects.filter(is_checked=True).order_by('-update_time')
     page_object = Pagination(request, game_list, page_size=15)
     qty = Game.objects.filter(is_checked=False).count()  # 未审核数量
