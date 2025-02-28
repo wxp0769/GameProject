@@ -37,7 +37,7 @@ urlpatterns = [
     path('game_list/<int:site_id>', views.game_list, name='game_list'),
     path('game_list_ok/<int:site_id>', views.game_list_checked, name='game_list_checked'),
     path('delete/<int:game_id>', views.del_game, name='del_game'),
-    path('addgame/', views.add_game, name='add_game'),
+    path('addgame/<int:site_id>', views.add_game, name='add_game'),
     path('editgame/<int:game_id>', views.edit_game, name='edit_game'),
     path('savepic/', views.savepic, name='savepic'),
     # >表单页面路由结束

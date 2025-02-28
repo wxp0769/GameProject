@@ -225,7 +225,7 @@ def game_list_checked(request,site_id):  # 管理已审核的游戏
 
     return render(request, 'admin/game_list.html', context)
 
-def add_game(request):
+def add_game(request,site_id):
     if request.method == 'POST':
         game_form = GameModelForm(request.POST, request.FILES)
         question_form = QuestionsModelForm(request.POST)
@@ -236,7 +236,7 @@ def add_game(request):
             question = question_form.save(commit=False)
             question.game = game  # 关联游戏
             question.save()
-            return redirect('/game_list')  # 替换为成功后的重定向URL
+            return redirect('/game_list/'+str(site_id))  # 替换为成功后的重定向URL
     else:
         game_form = GameModelForm()
         question_form = QuestionsModelForm()
