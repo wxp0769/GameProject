@@ -61,18 +61,11 @@
 </head>
 <body>
 <div class="container">
-    {#    <h1 class="mt-4">游戏列表</h1><a href="/game_list_ok/">已审核{{ qty_ok }}</a>&nbsp;&nbsp;<a href="/game_list/">未审核{{ qty }}</a>#}
-    {#    <!-- 搜索表单 -->#}
-    {#    <form method="GET" action="{% url 'game_list' %}">#}
-    {#        <input type="text" name="query" placeholder="搜索游戏" value="{{ query }}">#}
-    {#        <button type="submit">搜索</button>#}
-    {#    </form>#}
-
     <div class="header-container">
         <h1 class="mt-4">游戏列表</h1>
         <div class="header-right">
-            <a href="/game_list_ok/">已审核{{ qty_ok }}</a>&nbsp;&nbsp;
-            <a href="/game_list/">未审核{{ qty }}</a>
+            <a href="/game_list_ok/{{ site.nid }}">已审核{{ qty_ok }}</a>&nbsp;&nbsp;
+            <a href="/game_list/{{ site.nid }}">未审核{{ qty }}</a>
             <!-- 搜索表单 -->
             <form method="GET"  class="search-form">
                 <input type="text" name="query" placeholder="搜索游戏" value="{{ query }}">
@@ -80,7 +73,6 @@
             </form>
         </div>
     </div>
-
 
     <table class="table table-striped" style="border: 1px solid #dee2e6;">
         <thead>

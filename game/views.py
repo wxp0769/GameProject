@@ -69,6 +69,7 @@ def gameList(request):
     site = siteinfo()
     top_menus = menus()
     context = {
+        'site': site,
         "game_list": page_object.page_queryset,  # 分完页的数据
         'page_string': page_object.html(),  # 页码
         "site": site,
@@ -196,7 +197,9 @@ def game_list(request,site_id):  # 管理未审核的游戏
         page_object = Pagination(request, game_list, page_size=15)
     qty = Game.objects.filter(is_checked=False).count()  # 未审核数量
     qty_ok = Game.objects.filter(is_checked=True).count()  # 已审核数量
+    site = siteinfo(site_id)
     context = {
+        'site': site,
         "game_list": page_object.page_queryset,  # 分完页的数据
         'page_string': page_object.html(),  # 页码
         "query": query,  # 让搜索框回显
@@ -211,7 +214,9 @@ def game_list_checked(request,site_id):  # 管理已审核的游戏
     page_object = Pagination(request, game_list, page_size=15)
     qty = Game.objects.filter(is_checked=False).count()  # 未审核数量
     qty_ok = len(game_list)
+    site = siteinfo(site_id)
     context = {
+        'site': site,
         "game_list": page_object.page_queryset,  # 分完页的数据
         'page_string': page_object.html(),  # 页码
         "qty": qty,
