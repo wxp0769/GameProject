@@ -63,7 +63,6 @@ def game(request, slug):
         "index": 2,
     }
     return render(request, "game.html", context)
-
 def gameList(request):
     game_list = models.Game.objects.all().filter(is_checked=1).order_by('-update_time')
     page_object = Pagination(request, game_list, page_size=48)
@@ -78,17 +77,17 @@ def gameList(request):
     }
     return render(request, "list.html", context)
 
-def generate_allpage_html(request):
-    generate_index_html(request)
-    generate_allgame_html(request)
-    gameList_html(request)
-    aboutus_html(request)
-    copyright_html(request)
-    contactus_html(request)
-    privacypolicy_html(request)
-    termofuse_html(request)
-    generate_sitemap(request)
-    generate_404_page(request)
+def generate_allpage_html(request,site_id):
+    generate_index_html(request,site_id)
+    generate_allgame_html(request,site_id)
+    gameList_html(request,site_id)
+    aboutus_html(request,site_id)
+    copyright_html(request,site_id)
+    contactus_html(request,site_id)
+    privacypolicy_html(request,site_id)
+    termofuse_html(request,site_id)
+    generate_sitemap(request,site_id)
+    generate_404_page(request,site_id)
     return HttpResponse(f"全站静态 HTML 文件已生成")
 
 
@@ -253,13 +252,13 @@ def edit_game(request, game_id):
     game = get_object_or_404(Game, nid=game_id)  # 获取要编辑的游戏
     game.update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     questions = Questions.objects.filter(game=game)  # 获取与游戏相关的问题
-
+    site_id=game.site_id
     if request.method == 'POST':
         game_form = GameModelForm(request.POST, request.FILES, instance=game)
 
         if game_form.is_valid():
             game_form.save()  # 保存游戏数据
-            generate_game_html(request, game_id)  # 生成html
+            generate_game_html(request, game_id,site_id)  # 生成html
             # 更新问题
             for question in questions:
                 question_text = request.POST.get(f'question_{question.nid}')

@@ -44,10 +44,10 @@ urlpatterns = [
 
     # <静态页路由开始
     path("generate_index/<int:site_id>", views.generate_index_html, name="generate_index"),  # 生成首页静态html文件
-    path("generate_game/<int:game_id>", views.generate_game_html, name="generate_game"),  # 生成单个游戏页静态html文件
+    path("generate_game/<int:game_id>/<int:site_id>", views.generate_game_html, name="generate_game"),  # 生成单个游戏页静态html文件
     path("generate_allgame/<int:site_id>", views.generate_allgame_html, name="generate_allgame"),  # 生成所有游戏页静态html文件
     path("generate_list/<int:site_id>", views.gameList_html, name="generate_list"),  # 生成所有游戏页静态html文件
-    path("generate_allpage_html/", views.generate_allpage_html, name="generate_allpage_html"),  # 生成所有游戏页静态html文件
+    path("generate_allpage_html/<int:site_id>", views.generate_allpage_html, name="generate_allpage_html"),  # 生成所有游戏页静态html文件
     # >静态页路由结束
 
     # 生成问题及答案开始

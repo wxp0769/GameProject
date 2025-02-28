@@ -171,9 +171,9 @@ def gameList_html(request,site_id):  # 分类页html
     return HttpResponse(f"列表页静态 HTML 文件已生成，共 {paginator.num_pages} 页")
 
 
-def aboutus_html(request):
-    site = siteinfo()
-    top_menus = menus()
+def aboutus_html(request,site_id):
+    site = siteinfo(site_id)
+    top_menus = menus(site_id)
     about_title = "About Us"
     context = {
         "site": site,
@@ -193,9 +193,9 @@ def aboutus_html(request):
     return HttpResponse(
         f"AboutUs静态 HTML 文件已生成：<a href='/about-us.html' target='_blank'>点击查看</a>")
 
-def copyright_html(request):
-    site = siteinfo()
-    top_menus = menus()
+def copyright_html(request,site_id):
+    site = siteinfo(site_id)
+    top_menus = menus(site_id)
     about_title = "Copyright"
     context = {
         "site": site,
@@ -216,9 +216,9 @@ def copyright_html(request):
         f"Copyright静态 HTML 文件已生成：<a href='./copyright.html' target='_blank'>点击查看</a>")
 
 
-def contactus_html(request):
-    site = siteinfo()
-    top_menus = menus()
+def contactus_html(request,site_id):
+    site = siteinfo(site_id)
+    top_menus = menus(site_id)
     about_title = "Contact Us"
     context = {
         "site": site,
@@ -239,9 +239,9 @@ def contactus_html(request):
         f"Contact Us静态 HTML 文件已生成：<a href='./copyright.html' target='_blank'>点击查看</a>")
 
 
-def privacypolicy_html(request):
-    site = siteinfo()
-    top_menus = menus()
+def privacypolicy_html(request,site_id):
+    site = siteinfo(site_id)
+    top_menus = menus(site_id)
     about_title = "Privacy Policy"
     context = {
         "site": site,
@@ -262,9 +262,9 @@ def privacypolicy_html(request):
         f"Privacy Policy静态 HTML 文件已生成：<a href='./privacypolicy.html' target='_blank'>点击查看</a>")
 
 
-def termofuse_html(request):
-    site = siteinfo()
-    top_menus = menus()
+def termofuse_html(request,site_id):
+    site = siteinfo(site_id)
+    top_menus = menus(site_id)
     about_title = "Term Of Use"
     context = {
         "site": site,
@@ -285,10 +285,10 @@ def termofuse_html(request):
         f"Term Of Use静态 HTML 文件已生成：<a href='./termofuse.html' target='_blank'>点击查看</a>")
 
 
-def generate_sitemap(request):
+def generate_sitemap(request,site_id):
     # 获取动态内容（如数据库中的文章）
     games = Game.objects.filter(is_checked=True)
-    site = siteinfo()
+    site = siteinfo(site_id)
     # 获取静态页面 URL（如首页、关于页）
     static_urls = [
         reverse('aboutus'),
@@ -309,8 +309,8 @@ def generate_sitemap(request):
         f.write(xml_content)  # 写入 HTML 内容
     return HttpResponse(f"sitemap.xml已生成")
 
-def generate_404_page(request):
-    site = siteinfo()
+def generate_404_page(request,site_id):
+    site = siteinfo(site_id)
     html_output_dir = os.path.join(settings.BASE_DIR,site.site_url.replace("https://", "").replace("http://", "").replace("www.",""))  # 存储静态文件的目录，设置为空表示生成在根目录
     file_path = os.path.join(html_output_dir,f'404.html')  # 静态文件路径
     html_content = render_to_string("static/404.html")
