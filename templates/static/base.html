@@ -16,8 +16,14 @@
     {% elif index == 2 %}{{ game_obj.description }}{% elif index == 3 %}Enjoy HTML5 car racing games without downloads! 100+ unblocked games including drift challenges, F1 simulations & multiplayer races. School-friendly & Chromebook compatible. New games added daily!{% else %}{{ about_title }}{% endif %}">
     <link rel="icon" href="./static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./static/css/all_way.css">
-    <link rel="canonical" href="{{ site.site_url }}/{{ game_obj.slug }}.html">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {% if index == 1 %}<link rel="canonical" href="{{ site.site_url }}">
+    {% elif index == 2 %}<link rel="canonical" href="{{ site.site_url }}/{{ game_obj.slug }}.html">
+    {% elif index == 3 %}<link rel="canonical" href="{{ site.site_url }}/game_list_{{ page_obj.number }}.html">
+    {% elif aboutpage == 'a' %}<link rel="canonical" href="{{ site.site_url }}/about-us.html">
+    {% elif aboutpage == 'cr' %}<link rel="canonical" href="{{ site.site_url }}/copyright.html">
+    {% elif aboutpage == 'cu' %}<link rel="canonical" href="{{ site.site_url }}/contact-us.html">
+    {% elif aboutpage == 'p' %}<link rel="canonical" href="{{ site.site_url }}/privacy-policy.html">
+    {% elif aboutpage == 't' %}<link rel="canonical" href="{{ site.site_url }}/term-of-use.html">{% endif %}<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script type="application/ld+json">
