@@ -10,12 +10,11 @@ def pushByGit():
 
     # 检查是否有未提交的更改
     if repo.is_dirty(untracked_files=True):
-        from collections import OrderedDict
         modified_files = [item.a_path for item in repo.index.diff(None)]  # 获取已修改的文件
         untracked_files = repo.untracked_files  # 获取未跟踪的文件（新文件）
         deleted_files = [item.a_path for item in repo.index.diff(None) if item.deleted_file]  # 获取已删除的文件
-        list = modified_files + deleted_files
-        list = list(OrderedDict.fromkeys(list))
+        original_list = modified_files + deleted_files
+        list = list(dict.fromkeys(original_list))
         print("已修改文件:", list)
         # 添加所有更改（包括新文件和删除的文件）
         repo.git.add(A=True)  # 等同于 `git add .`
