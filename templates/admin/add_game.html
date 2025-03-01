@@ -40,7 +40,7 @@
             </div>
             <div style="flex: 1;display: flex; flex-direction: column; justify-content: left;">
                 <!-- 缩略图预览 -->
-                <img id="thumbnail-preview" src="{{ game_form.instance.thumbnail|default:'/static/images/logo.png' }}"
+                <img id="thumbnail-preview" src="/media/{{ game_form.instance.thumbnail|default:'/media/logo.png' }}"
                      alt="Thumbnail Preview"
                      style="cursor:pointer; width: 350px; height: 350px; object-fit: cover;"
                      onclick="document.getElementById('thumbnail-input').click();"/>

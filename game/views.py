@@ -195,8 +195,8 @@ def game_list(request,site_id):  # 管理未审核的游戏
     else:
         game_list = Game.objects.filter(is_checked=False,site_id=site_id).order_by('-update_time')  # 显示所有游戏
         page_object = Pagination(request, game_list, page_size=15)
-    qty = Game.objects.filter(is_checked=False).count()  # 未审核数量
-    qty_ok = Game.objects.filter(is_checked=True).count()  # 已审核数量
+    qty = Game.objects.filter(is_checked=False,site_id=site_id).count()  # 未审核数量
+    qty_ok = Game.objects.filter(is_checked=True,site_id=site_id).count()  # 已审核数量
     site = siteinfo(site_id)
     context = {
         'site': site,
@@ -210,9 +210,9 @@ def game_list(request,site_id):  # 管理未审核的游戏
     return render(request, 'admin/game_list.html', context)
 
 def game_list_checked(request,site_id):  # 管理已审核的游戏
-    game_list = models.Game.objects.filter(is_checked=True).order_by('-update_time')
+    game_list = models.Game.objects.filter(is_checked=True,site_id=site_id).order_by('-update_time')
     page_object = Pagination(request, game_list, page_size=15)
-    qty = Game.objects.filter(is_checked=False).count()  # 未审核数量
+    qty = Game.objects.filter(is_checked=False,site_id=site_id).count()  # 未审核数量
     qty_ok = len(game_list)
     site = siteinfo(site_id)
     context = {
@@ -247,7 +247,7 @@ def add_game(request,site_id):
 def del_game(request, game_id):
     try:
         game = models.Game.objects.get(nid=game_id)
-        site_id=game.site.id
+        site_id=game.site_id
         game.delete()
         return redirect('/game_list/'+str(site_id))  # 替换为成功后的重定向URL
     except models.Game.DoesNotExist:

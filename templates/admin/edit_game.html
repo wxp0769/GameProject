@@ -51,7 +51,7 @@
                 <div style="margin-left: 5px;">
                     <!-- 缩略图预览 -->
                     <img id="thumbnail-preview"
-                         src="{{ game_form.instance.thumbnail.url|default:'/avatars/default.png' }}"
+                         src="/media/{{ game_form.instance.thumbnail|default:'/media/logo.png' }}"
                          alt="Thumbnail Preview"
                          style="cursor:pointer; width: 350px; height: 350px; object-fit: cover;"
                          onclick="document.getElementById('thumbnail-input').click();"/>
