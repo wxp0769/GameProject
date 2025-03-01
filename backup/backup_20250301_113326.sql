@@ -259,7 +259,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +268,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2025-01-21 09:40:32.820468'),(2,'auth','0001_initial','2025-01-21 09:40:33.046471'),(3,'admin','0001_initial','2025-01-21 09:40:33.093471'),(4,'admin','0002_logentry_remove_auto_add','2025-01-21 09:40:33.097470'),(5,'admin','0003_logentry_add_action_flag_choices','2025-01-21 09:40:33.101471'),(6,'contenttypes','0002_remove_content_type_name','2025-01-21 09:40:33.131468'),(7,'auth','0002_alter_permission_name_max_length','2025-01-21 09:40:33.153479'),(8,'auth','0003_alter_user_email_max_length','2025-01-21 09:40:33.164477'),(9,'auth','0004_alter_user_username_opts','2025-01-21 09:40:33.167477'),(10,'auth','0005_alter_user_last_login_null','2025-01-21 09:40:33.189477'),(11,'auth','0006_require_contenttypes_0002','2025-01-21 09:40:33.190474'),(12,'auth','0007_alter_validators_add_error_messages','2025-01-21 09:40:33.194473'),(13,'auth','0008_alter_user_username_max_length','2025-01-21 09:40:33.216474'),(14,'auth','0009_alter_user_last_name_max_length','2025-01-21 09:40:33.239477'),(15,'auth','0010_alter_group_name_max_length','2025-01-21 09:40:33.248473'),(16,'auth','0011_update_proxy_permissions','2025-01-21 09:40:33.254477'),(17,'auth','0012_alter_user_first_name_max_length','2025-01-21 09:40:33.278474'),(18,'sessions','0001_initial','2025-01-21 09:40:33.292477'),(19,'game','0001_initial','2025-01-21 09:49:09.360493'),(20,'game','0002_alter_site_logo','2025-01-21 09:55:18.352070'),(21,'game','0003_rename_iframepageurl_game_iframeurl','2025-01-21 21:36:26.515814'),(22,'game','0004_remove_game_gamepageurl','2025-01-21 21:37:40.531830'),(23,'game','0005_remove_game_iframedescription_and_more','2025-01-21 21:41:41.184379'),(24,'game','0006_alter_game_howtoplay_alter_game_content_and_more','2025-01-22 11:48:23.681514'),(25,'game','0007_questiones','2025-01-24 21:30:00.279522'),(26,'game','0008_site_privacypolicy_site_termofuse_site_aboutus_and_more','2025-01-25 10:41:03.384899'),(27,'game','0009_alter_site_privacypolicy_alter_site_termofuse_and_more','2025-01-25 10:43:22.878725'),(28,'game','0010_alter_site_site_url','2025-01-26 11:41:53.115286'),(29,'game','0011_alter_site_logo','2025-01-26 11:59:38.708005'),(30,'game','0012_alter_game_recommend','2025-01-26 22:08:43.412147'),(31,'game','0013_alter_game_recommend','2025-01-26 22:10:43.470599'),(32,'game','0014_rename_questiones_questions_alter_game_recommend','2025-01-28 21:12:25.470547'),(33,'game','0015_alter_game_iframeurl_alter_game_thumbnail','2025-01-29 17:24:26.342929'),(34,'game','0016_alter_game_iframeurl','2025-01-30 10:45:20.167969'),(35,'game','0017_alter_game_iframeurl','2025-01-30 10:46:33.027009'),(36,'game','0018_alter_game_iframeurl','2025-01-30 10:47:15.096155'),(37,'game','0019_alter_game_iframeurl','2025-01-30 10:47:44.416936'),(38,'game','0020_alter_site_description','2025-02-02 12:43:46.623315'),(39,'game','0021_alter_site_site_name_alter_site_title','2025-02-02 15:38:51.592109'),(40,'game','0022_alter_game_description','2025-02-03 11:37:43.073864'),(41,'game','0023_pachong_game_source','2025-02-05 12:28:20.646010'),(42,'game','0024_alter_pachong_description_alter_pachong_source_and_more','2025-02-05 12:32:17.046030'),(43,'game','0025_game_is_checked','2025-02-05 16:08:59.412226'),(44,'game','0026_pachong_is_publish','2025-02-05 18:11:38.910787'),(45,'game','0027_alter_game_slug','2025-02-05 18:51:12.150998'),(46,'game','0028_alter_game_description','2025-02-05 19:13:38.440989'),(47,'game','0029_alter_game_thumbnail','2025-02-06 15:52:46.842904'),(48,'game','0030_alter_game_iframeurl','2025-02-08 10:14:42.728347'),(49,'game','0031_alter_game_iframeurl','2025-02-08 19:46:33.230125'),(50,'game','0032_alter_game_iframeurl_alter_site_description','2025-02-10 10:04:13.454982'),(51,'game','0033_alter_questions_answer_alter_questions_question','2025-02-12 20:05:29.059531'),(52,'game','0034_site_games','2025-02-22 16:10:11.159748'),(53,'game','0035_remove_site_games_game_site_alter_game_thumbnail_and_more','2025-02-23 11:37:26.875011'),(54,'game','0036_alter_game_howtoplay_alter_game_content_and_more','2025-02-25 11:56:39.031981');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2025-01-21 09:40:32.820468'),(2,'auth','0001_initial','2025-01-21 09:40:33.046471'),(3,'admin','0001_initial','2025-01-21 09:40:33.093471'),(4,'admin','0002_logentry_remove_auto_add','2025-01-21 09:40:33.097470'),(5,'admin','0003_logentry_add_action_flag_choices','2025-01-21 09:40:33.101471'),(6,'contenttypes','0002_remove_content_type_name','2025-01-21 09:40:33.131468'),(7,'auth','0002_alter_permission_name_max_length','2025-01-21 09:40:33.153479'),(8,'auth','0003_alter_user_email_max_length','2025-01-21 09:40:33.164477'),(9,'auth','0004_alter_user_username_opts','2025-01-21 09:40:33.167477'),(10,'auth','0005_alter_user_last_login_null','2025-01-21 09:40:33.189477'),(11,'auth','0006_require_contenttypes_0002','2025-01-21 09:40:33.190474'),(12,'auth','0007_alter_validators_add_error_messages','2025-01-21 09:40:33.194473'),(13,'auth','0008_alter_user_username_max_length','2025-01-21 09:40:33.216474'),(14,'auth','0009_alter_user_last_name_max_length','2025-01-21 09:40:33.239477'),(15,'auth','0010_alter_group_name_max_length','2025-01-21 09:40:33.248473'),(16,'auth','0011_update_proxy_permissions','2025-01-21 09:40:33.254477'),(17,'auth','0012_alter_user_first_name_max_length','2025-01-21 09:40:33.278474'),(18,'sessions','0001_initial','2025-01-21 09:40:33.292477'),(19,'game','0001_initial','2025-01-21 09:49:09.360493'),(20,'game','0002_alter_site_logo','2025-01-21 09:55:18.352070'),(21,'game','0003_rename_iframepageurl_game_iframeurl','2025-01-21 21:36:26.515814'),(22,'game','0004_remove_game_gamepageurl','2025-01-21 21:37:40.531830'),(23,'game','0005_remove_game_iframedescription_and_more','2025-01-21 21:41:41.184379'),(24,'game','0006_alter_game_howtoplay_alter_game_content_and_more','2025-01-22 11:48:23.681514'),(25,'game','0007_questiones','2025-01-24 21:30:00.279522'),(26,'game','0008_site_privacypolicy_site_termofuse_site_aboutus_and_more','2025-01-25 10:41:03.384899'),(27,'game','0009_alter_site_privacypolicy_alter_site_termofuse_and_more','2025-01-25 10:43:22.878725'),(28,'game','0010_alter_site_site_url','2025-01-26 11:41:53.115286'),(29,'game','0011_alter_site_logo','2025-01-26 11:59:38.708005'),(30,'game','0012_alter_game_recommend','2025-01-26 22:08:43.412147'),(31,'game','0013_alter_game_recommend','2025-01-26 22:10:43.470599'),(32,'game','0014_rename_questiones_questions_alter_game_recommend','2025-01-28 21:12:25.470547'),(33,'game','0015_alter_game_iframeurl_alter_game_thumbnail','2025-01-29 17:24:26.342929'),(34,'game','0016_alter_game_iframeurl','2025-01-30 10:45:20.167969'),(35,'game','0017_alter_game_iframeurl','2025-01-30 10:46:33.027009'),(36,'game','0018_alter_game_iframeurl','2025-01-30 10:47:15.096155'),(37,'game','0019_alter_game_iframeurl','2025-01-30 10:47:44.416936'),(38,'game','0020_alter_site_description','2025-02-02 12:43:46.623315'),(39,'game','0021_alter_site_site_name_alter_site_title','2025-02-02 15:38:51.592109'),(40,'game','0022_alter_game_description','2025-02-03 11:37:43.073864'),(41,'game','0023_pachong_game_source','2025-02-05 12:28:20.646010'),(42,'game','0024_alter_pachong_description_alter_pachong_source_and_more','2025-02-05 12:32:17.046030'),(43,'game','0025_game_is_checked','2025-02-05 16:08:59.412226'),(44,'game','0026_pachong_is_publish','2025-02-05 18:11:38.910787'),(45,'game','0027_alter_game_slug','2025-02-05 18:51:12.150998'),(46,'game','0028_alter_game_description','2025-02-05 19:13:38.440989'),(47,'game','0029_alter_game_thumbnail','2025-02-06 15:52:46.842904'),(48,'game','0030_alter_game_iframeurl','2025-02-08 10:14:42.728347'),(49,'game','0031_alter_game_iframeurl','2025-02-08 19:46:33.230125'),(50,'game','0032_alter_game_iframeurl_alter_site_description','2025-02-10 10:04:13.454982'),(51,'game','0033_alter_questions_answer_alter_questions_question','2025-02-12 20:05:29.059531'),(52,'game','0034_site_games','2025-02-22 16:10:11.159748'),(53,'game','0035_remove_site_games_game_site_alter_game_thumbnail_and_more','2025-02-23 11:37:26.875011'),(54,'game','0036_alter_game_howtoplay_alter_game_content_and_more','2025-02-25 11:56:39.031981'),(55,'game','0002_alter_game_thumbnail_alter_site_termofuse','2025-03-01 10:33:25.630278'),(56,'game','0003_alter_game_thumbnail','2025-03-01 10:36:40.188665');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +310,7 @@ CREATE TABLE `game_game` (
   `title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumbnail` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `iframeUrl` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `recommend` int NOT NULL,
   `create_time` datetime(6) NOT NULL,
@@ -325,7 +325,7 @@ CREATE TABLE `game_game` (
   UNIQUE KEY `slug` (`slug`),
   KEY `game_game_site_id_207773e7_fk_game_site_nid` (`site_id`),
   CONSTRAINT `game_game_site_id_207773e7_fk_game_site_nid` FOREIGN KEY (`site_id`) REFERENCES `game_site` (`nid`)
-) ENGINE=InnoDB AUTO_INCREMENT=338 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -381,7 +381,7 @@ CREATE TABLE `game_questions` (
   PRIMARY KEY (`nid`),
   KEY `game_questiones_game_id_fe078391_fk_game_game_nid` (`game_id`),
   CONSTRAINT `game_questiones_game_id_fe078391_fk_game_game_nid` FOREIGN KEY (`game_id`) REFERENCES `game_game` (`nid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2259 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2268 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -409,7 +409,7 @@ CREATE TABLE `game_site` (
   `title` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Privacypolicy` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `Termofuse` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `Termofuse` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `aboutus` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `contactus` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `copyright` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -436,4 +436,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-01 10:16:36
+-- Dump completed on 2025-03-01 11:33:26
