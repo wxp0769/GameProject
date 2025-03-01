@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <title>管理页面</title>
     <style>
-        .collapse {
-            margin-left: 15px;
+        a {
+        color: #fff;
         }
+        h1 a{
+        text-decoration: none!important;
+        }
+
     </style>
 </head>
 <body>
@@ -21,19 +26,19 @@
                 </header>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="/createsite/" target="contentFrame">增加站点 </a>
+                        <a class="nav-link" href="/createsite/" target="contentFrame"><i class="bi bi-plus"> </i>增加站点</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/site_list/" target="contentFrame">站点列表</a>
+                        <a class="nav-link" href="/site_list/" target="contentFrame"><i class="bi bi-tools"> </i>站点列表</a>
                     </li>
                     <li class="nav-item">
-                       <a class="nav-link" href="/backup" target="contentFrame">数据库备份</a>
+                       <a class="nav-link" href="/backup" target="contentFrame"><i class="bi bi-cloud-upload"> </i>数据库备份</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/restore" target="contentFrame">数据库恢复</a>
+                        <a class="nav-link" href="/restore" target="contentFrame"><i class="bi bi-cloud-download"> </i>数据库恢复</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/push/" target="contentFrame">部署站点</a>
+                        <a class="nav-link" href="/push/" target="contentFrame"><i class="bi bi-rocket"> </i>部署站点</a>
                     </li>
                 </ul>
             </div>
