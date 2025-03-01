@@ -18,6 +18,7 @@
                 <div class="form-group d-flex align-items-center">
                     {{ game_form.is_checked.label_tag }}
                     {{ game_form.is_checked }}  <!-- 直接渲染字段 -->
+                    <button id="down_ai_pic">1图片2描述3缩略图</button>
                 </div>
                 <div style="display: flex; align-items: center;">
                     {{ game_form.title.label_tag }}
@@ -86,6 +87,15 @@
     </form>
 
     <script>
+        document.getElementById('down_ai_pic').addEventListener('click', function(event) {
+            event.preventDefault(); // 防止按钮默认提交行为
+        // 触发保存按钮点击
+        document.getElementById('savepic').click();
+        // 触发AI按钮点击
+        document.getElementById('description').click();
+        // 调用缩略图更新函数
+        document.getElementById('thumbnail-preview').click();
+    });
         function updateThumbnail(event) {
             const file = event.target.files[0];
             const reader = new FileReader();

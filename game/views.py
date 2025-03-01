@@ -247,8 +247,9 @@ def add_game(request,site_id):
 def del_game(request, game_id):
     try:
         game = models.Game.objects.get(nid=game_id)
+        site_id=game.site.id
         game.delete()
-        return redirect('/game_list')
+        return redirect('/game_list/'+str(site_id))  # 替换为成功后的重定向URL
     except models.Game.DoesNotExist:
         return HttpResponse("游戏不存在")
 
@@ -278,7 +279,7 @@ def edit_game(request, game_id):
                     # 如果问题为空，可以选择删除或忽略
                     question.delete()  # 删除空白问题记录
 
-            return redirect('game_list')  # 跳转到游戏列表页
+            return redirect('/game_list/'+str(site_id))  # 替换为成功后的重定向URL
     else:
         game_form = GameModelForm(instance=game)  # 加载游戏数据到表单
 
@@ -290,6 +291,7 @@ def edit_game(request, game_id):
 
 def generate_QandA(request, game_id):
     game = Game.objects.get(nid=game_id)
+    site_id = game.site_id
     print(game.title)
     prompts = """
     编程语言：python
@@ -323,10 +325,11 @@ def generate_QandA(request, game_id):
         Questions.objects.filter(game_id=game.nid).delete()
         for qa in qas_list:
             Questions.objects.create(game_id=game.nid, question=qa["question"], answer=qa["answer"])
-    return redirect('/game_list')  # 替换为成功后的重定向URL
+    return redirect('/game_list/'+str(site_id))  # 替换为成功后的重定向URL
 
 def generate_whathow(request, game_id):
     game = Game.objects.get(nid=game_id)
+    site_id = game.site_id
     title = game.title
     prompts = f"""    
     1）用英文回答What is {title} game?字数限制在100words以内
@@ -349,7 +352,7 @@ def generate_whathow(request, game_id):
         game.whatis = game_info[0]["whatis"]
         game.HowtoPlay = game_info[0]["howtoplay"]
         game.save()
-    return redirect('/game_list')  # 替换为成功后的重定向URL
+    return redirect('/game_list/'+str(site_id))  # 替换为成功后的重定向URL
 
 
 # ajax调用AI
